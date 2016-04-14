@@ -15,13 +15,13 @@ namespace calendar_run.Model {
 
         public override string ToString() {
             StringBuilder sb = new StringBuilder();
-            sb.Append("DayGrid: ");
-            sb.Append("Enable: ");
+            sb.Append("{ Enable: ");
             sb.Append(Enable);
-            sb.Append(" Day: ");
+            sb.Append(", Day: ");
             sb.Append(Day);
-            sb.Append(" TodoItem: ");
+            sb.Append(", TodoItem: ");
             sb.Append(TodoItem == null ? "null" : TodoItem.ToString());
+            sb.Append(" }");
             return sb.ToString();
         }
     }
