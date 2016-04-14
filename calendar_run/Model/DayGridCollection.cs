@@ -14,6 +14,10 @@ namespace calendar_run.Model {
         // 6 rows, 7 columns in a calendar 
         private static readonly int GRID_NUM = 6 * 7;
 
+        public int Year { get; set; } = 0;
+        public int Month { get; set; } = 0;
+        public int StartWeek { get; set; } = -1;
+
         public DayGridCollection() {
             for (int i = 0; i < GRID_NUM; ++i) {
                 Add(new DayGrid());
@@ -21,6 +25,9 @@ namespace calendar_run.Model {
         }
 
         public DayGridCollection(int year, int month) : this() {
+            if (year <= 0 || month < 1 || month > 12) {
+                return;
+            }
             refresh(year, month);
         }
 
@@ -36,6 +43,20 @@ namespace calendar_run.Model {
                 this[i].Day = cnt + 1;
                 this[i].Enable = true;
             }
+            Year = year;
+            Month = month;
+            StartWeek = startWeek;
+        }
+
+        /// <summary>
+        /// Bind a TodoItem with the corresponding grid
+        /// </summary>
+        /// <param name="todoItem"></param>
+        public void Bind(TodoItem todoItem) {
+            if (todoItem.Date.Year != Year || todoItem.Date.Month != Month) {
+                return;
+            }
+            this[StartWeek + todoItem.Date.Day - 1].TodoItem = todoItem;
         }
 
         public override string ToString() {

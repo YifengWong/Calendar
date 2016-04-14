@@ -33,7 +33,8 @@ namespace calendar_run {
                 TodoItem = item
             };
 
-            DayGridCollection coll = new DayGridCollection(2016, 3);
+            DayGridCollection coll = new DayGridCollection(2016, 4);
+            coll.Bind(item);
 
             textBlock.Text = coll.ToString();
         }
