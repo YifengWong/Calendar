@@ -13,6 +13,9 @@ namespace calendar_run.Model {
         public string Title { get; set; }
         public string Details { get; set; }
 
+        /// <summary>
+        /// Override ToString() to show messages about the object.
+        /// </summary>
         public override string ToString() {
             StringBuilder sb = new StringBuilder();
             sb.Append("{ Title: ");

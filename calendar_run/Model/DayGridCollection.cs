@@ -8,22 +8,44 @@ using System.Threading.Tasks;
 
 namespace calendar_run.Model {
     /// <summary>
-    /// A DayGrid collection to present all day grids in a month
+    /// A DayGrid collection to present all calendar grids in a month.
     /// </summary>
     public class DayGridCollection : ObservableCollection<DayGrid> {
-        // 6 rows, 7 columns in a calendar 
+        /// <summary>
+        /// A calendar has at most 42 grids,
+        /// that is, 6 rows and 7 columns.
+        /// </summary>
         private static readonly int GRID_NUM = 6 * 7;
 
+        /// <summary>
+        /// Current year of the grids.
+        /// </summary>
         public int Year { get; set; } = 0;
-        public int Month { get; set; } = 0;
-        public int StartWeek { get; set; } = -1;
 
+        /// <summary>
+        /// Current month of the grids.
+        /// </summary>
+        public int Month { get; set; } = 0;
+
+        /// <summary>
+        /// The first day index of the grids
+        /// </summary>
+        public int FirstDayIndex { get; set; } = -1;
+
+        /// <summary>
+        /// Initilize all grids with default constructor
+        /// </summary>
         public DayGridCollection() {
             for (int i = 0; i < GRID_NUM; ++i) {
                 Add(new DayGrid());
             }
         }
 
+        /// <summary>
+        /// Initialize all grids with specific year and month
+        /// </summary>
+        /// <param name="year"></param>
+        /// <param name="month"></param>
         public DayGridCollection(int year, int month) : this() {
             if (year <= 0 || month < 1 || month > 12) {
                 return;
@@ -37,15 +59,15 @@ namespace calendar_run.Model {
         /// <param name="year"></param>
         /// <param name="month"></param>
         public void refresh(int year, int month) {
-            int startWeek = CalendarUtil.GetWeekOfTheFirstDay(year, month);
+            int firstDayIndex = CalendarUtil.GetWeekOfTheFirstDay(year, month);
             int daysOfMonth = CalendarUtil.GetDaysOfMonth(year, month);
-            for (int i = startWeek, cnt = 0; cnt < daysOfMonth; ++i, ++cnt) {
+            for (int i = firstDayIndex, cnt = 0; cnt < daysOfMonth; ++i, ++cnt) {
                 this[i].Day = cnt + 1;
                 this[i].Enable = true;
             }
             Year = year;
             Month = month;
-            StartWeek = startWeek;
+            FirstDayIndex = firstDayIndex;
         }
 
         /// <summary>
@@ -56,9 +78,12 @@ namespace calendar_run.Model {
             if (todoItem.Date.Year != Year || todoItem.Date.Month != Month) {
                 return;
             }
-            this[StartWeek + todoItem.Date.Day - 1].TodoItem = todoItem;
+            this[FirstDayIndex + todoItem.Date.Day - 1].TodoItem = todoItem;
         }
 
+        /// <summary>
+        /// Override ToString() to show messages about the object.
+        /// </summary>
         public override string ToString() {
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < GRID_NUM; ++i) {

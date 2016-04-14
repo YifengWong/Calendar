@@ -6,13 +6,16 @@ using System.Threading.Tasks;
 
 namespace calendar_run.Model {
     /// <summary>
-    /// Present one specific day grid in a calendar
+    /// Present one specific grid in a calendar
     /// </summary>
     public class DayGrid {
         public bool Enable { get; set; } = false;
         public int Day { get; set; } = 0;
         public TodoItem TodoItem { get; set; } = null;
 
+        /// <summary>
+        /// Override ToString() to show messages about the object.
+        /// </summary>
         public override string ToString() {
             StringBuilder sb = new StringBuilder();
             sb.Append("{ Enable: ");
