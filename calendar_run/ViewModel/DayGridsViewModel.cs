@@ -22,5 +22,44 @@ namespace calendar_run.ViewModel {
             DayGrids = new DayGridCollection(now.Year, now.Month);
         }
 
+        /// <summary>
+        /// Refresh the calendar grids.
+        /// </summary>
+        /// <param name="year"></param>
+        /// <param name="month"></param>
+        public void refresh(int year, int month) {
+            DayGrids.refresh(year, month);
+        }
+
+        /// <summary>
+        /// Refresh contents to last month.
+        /// </summary>
+        public void refreshToLastMonth() {
+            int year = DayGrids.Year;
+            int month = DayGrids.Month;
+            if (month == 1) {
+                --year;
+                month = 12;
+            } else {
+                --month;
+            }
+            refresh(year, month);
+        }
+
+        /// <summary>
+        /// Refresh contents to next month.
+        /// </summary>
+        public void refreshToNextMonth() {
+            int year = DayGrids.Year;
+            int month = DayGrids.Month;
+            if (month == 12) {
+                ++year;
+                month = 1;
+            } else {
+                ++month;
+            }
+            refresh(year, month);
+        }
+
     }
 }

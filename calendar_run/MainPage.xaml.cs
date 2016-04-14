@@ -26,5 +26,12 @@ namespace calendar_run {
             ViewModel = new DayGridsViewModel();
         }
 
+        private void AppBarButtonBack_Click(object sender, RoutedEventArgs e) {
+            ViewModel.refreshToLastMonth();
+        }
+
+        private void AppBarButtonNext_Click(object sender, RoutedEventArgs e) {
+            ViewModel.refreshToNextMonth();
+        }
     }
 }

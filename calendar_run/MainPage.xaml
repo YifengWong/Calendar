@@ -11,42 +11,87 @@
 
     <Page.Resources>
         <converter:TotalWidthToGridWidth x:Key="TotalWidthToGridWidth" />
+        <converter:BoolToVisibility x:Key="BoolToVisibility" />
     </Page.Resources>
 
     <StackPanel
         Orientation="Vertical"
         Margin="10,10,10,10"
         Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        
+        <!-- Title -->
         <StackPanel
             Orientation="Horizontal"
-            HorizontalAlignment="Center">
-            <StackPanel
-                Orientation="Horizontal">
-                <TextBlock Text="{x:Bind ViewModel.DayGrids.Year}"/>
-                <TextBlock Text="年" />
-            </StackPanel>
+            HorizontalAlignment="Center"
+            Margin="0,0,0,30">
+            <AppBarButton
+                Icon="Back"
+                IsCompact="True"
+                Margin="0,0,40,0"
+                VerticalAlignment="Center"
+                Click="AppBarButtonBack_Click"/>
             <StackPanel
                 Orientation="Horizontal"
-                Margin="10,0,0,0">
-                <TextBlock Text="{x:Bind ViewModel.DayGrids.Month}"/>
-                <TextBlock Text="月" />
+                VerticalAlignment="Center">
+                <TextBlock
+                    Text="{x:Bind ViewModel.DayGrids.Year, Mode=OneWay}"      
+                    Style="{StaticResource HeaderTextBlockStyle}"/>
+                <TextBlock
+                    Text="年"
+                    Style="{StaticResource HeaderTextBlockStyle}"/>
+                <TextBlock
+                    Text="{x:Bind ViewModel.DayGrids.Month, Mode=OneWay}"
+                    Style="{StaticResource HeaderTextBlockStyle}"
+                    Margin="10,0,0,0"/>
+                <TextBlock
+                    Text="月"
+                    Style="{StaticResource HeaderTextBlockStyle}"/>
             </StackPanel>
+            <AppBarButton 
+                Icon="Forward"
+                IsCompact="True"
+                Margin="40,0,0,0"
+                VerticalAlignment="Center"
+                Click="AppBarButtonNext_Click"/>
         </StackPanel>
 
-        <GridView
+        <!-- Week bar -->
+        <!--<GridView
             x:Name="gridView"
-            ItemsSource="{x:Bind ViewModel.DayGrids}">
+            ItemsSource="{x:Bind ViewModel.DayGrids}" >
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="model:DayGrid">
                     <StackPanel
-                            x:Name="gridPanel"
-                            Orientation="Vertical"
-                            Width="{Binding Width, ElementName=gridView, Converter={StaticResource TotalWidthToGridWidth}}"
-                            Height="{Binding Width, ElementName=gridPanel}">
+                        x:Name="gridPanel"
+                        Orientation="Vertical"
+                        Width="{Binding Width, ElementName=gridView, Converter={StaticResource TotalWidthToGridWidth}}"
+                        Height="{Binding Width, ElementName=gridPanel}">
                         <TextBlock
                             Text="{x:Bind Day}"
                             HorizontalAlignment="Right"
-                            Margin="0,5,8,0"/>
+                            Margin="0,5,8,0"
+                            Visibility="{x:Bind Enable, Converter={StaticResource BoolToVisibility}}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+        </GridView>-->
+
+        <!-- Calendar content -->
+        <GridView
+            x:Name="gridView"
+            ItemsSource="{x:Bind ViewModel.DayGrids}" >
+            <GridView.ItemTemplate>
+                <DataTemplate x:DataType="model:DayGrid">
+                    <StackPanel
+                        x:Name="gridPanel"
+                        Orientation="Vertical"
+                        Width="{Binding Width, ElementName=gridView, Converter={StaticResource TotalWidthToGridWidth}}"
+                        Height="{Binding Width, ElementName=gridPanel}">
+                        <TextBlock
+                            Text="{x:Bind Day}"
+                            HorizontalAlignment="Right"
+                            Margin="0,5,8,0"
+                            Visibility="{x:Bind Enable, Converter={StaticResource BoolToVisibility}}"/>
                     </StackPanel>
                 </DataTemplate>
             </GridView.ItemTemplate>
@@ -57,6 +102,7 @@
                 <VisualState>
                     <VisualState.Setters>
                         <Setter Target="gridView.Width" Value="500"/>
+                        <Setter Target="weekPanel.Width" Value="500" />
                     </VisualState.Setters>
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="1"/>
@@ -65,6 +111,7 @@
                 <VisualState>
                     <VisualState.Setters>
                         <Setter Target="gridView.Width" Value="700"/>
+                        <Setter Target="weekPanel.Width" Value="700" />
                     </VisualState.Setters>
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="700"/>
@@ -73,6 +120,7 @@
                 <VisualState>
                     <VisualState.Setters>
                         <Setter Target="gridView.Width" Value="800"/>
+                        <Setter Target="weekPanel.Width" Value="800" />
                     </VisualState.Setters>
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="800"/>

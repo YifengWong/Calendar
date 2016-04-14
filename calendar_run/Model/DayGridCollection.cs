@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -54,11 +55,23 @@ namespace calendar_run.Model {
         }
 
         /// <summary>
+        /// Initialize the contents to default.
+        /// </summary>
+        public void init() {
+            for (int i = 0; i < GRID_NUM; ++i) {
+                this[i].Enable = false;
+                this[i].Day = 0;
+                this[i].TodoItem = null;
+            }
+        }
+
+        /// <summary>
         /// Refresh the content of day grids according to year and month
         /// </summary>
         /// <param name="year"></param>
         /// <param name="month"></param>
         public void refresh(int year, int month) {
+            init();
             int firstDayIndex = CalendarUtil.GetWeekOfTheFirstDay(year, month);
             int daysOfMonth = CalendarUtil.GetDaysOfMonth(year, month);
             for (int i = firstDayIndex, cnt = 0; cnt < daysOfMonth; ++i, ++cnt) {
@@ -68,6 +81,8 @@ namespace calendar_run.Model {
             Year = year;
             Month = month;
             FirstDayIndex = firstDayIndex;
+            // Update contents event
+            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
         }
 
         /// <summary>

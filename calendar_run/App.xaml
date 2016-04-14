@@ -5,4 +5,16 @@
     xmlns:local="using:calendar_run"
     RequestedTheme="Light">
 
+    <Application.Resources>
+        <Style x:Key="HeaderTextBlockStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+
+        <Style x:Key="WeekTextBlockStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+        </Style>
+    </Application.Resources>
+
 </Application>
