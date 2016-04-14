@@ -56,36 +56,32 @@
         </StackPanel>
 
         <!-- Week bar -->
-        <!--<GridView
-            x:Name="gridView"
-            ItemsSource="{x:Bind ViewModel.DayGrids}" >
+        <GridView
+            x:Name="weekGridView"
+            ItemsSource="{x:Bind ViewModel.Weeks}" >
             <GridView.ItemTemplate>
-                <DataTemplate x:DataType="model:DayGrid">
+                <DataTemplate x:DataType="model:Week">
                     <StackPanel
                         x:Name="gridPanel"
-                        Orientation="Vertical"
-                        Width="{Binding Width, ElementName=gridView, Converter={StaticResource TotalWidthToGridWidth}}"
-                        Height="{Binding Width, ElementName=gridPanel}">
+                        Width="{Binding Width, ElementName=daysGridView, Converter={StaticResource TotalWidthToGridWidth}}">
                         <TextBlock
-                            Text="{x:Bind Day}"
-                            HorizontalAlignment="Right"
-                            Margin="0,5,8,0"
-                            Visibility="{x:Bind Enable, Converter={StaticResource BoolToVisibility}}"/>
+                            Text="{x:Bind Name}"
+                            HorizontalAlignment="Right"/>
                     </StackPanel>
                 </DataTemplate>
             </GridView.ItemTemplate>
-        </GridView>-->
+        </GridView>
 
         <!-- Calendar content -->
         <GridView
-            x:Name="gridView"
+            x:Name="daysGridView"
             ItemsSource="{x:Bind ViewModel.DayGrids}" >
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="model:DayGrid">
                     <StackPanel
                         x:Name="gridPanel"
                         Orientation="Vertical"
-                        Width="{Binding Width, ElementName=gridView, Converter={StaticResource TotalWidthToGridWidth}}"
+                        Width="{Binding Width, ElementName=daysGridView, Converter={StaticResource TotalWidthToGridWidth}}"
                         Height="{Binding Width, ElementName=gridPanel}">
                         <TextBlock
                             Text="{x:Bind Day}"
@@ -97,11 +93,12 @@
             </GridView.ItemTemplate>
         </GridView>
 
+        <!-- Adaptive state groups -->
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
                 <VisualState>
                     <VisualState.Setters>
-                        <Setter Target="gridView.Width" Value="500"/>
+                        <Setter Target="daysGridView.Width" Value="500"/>
                         <Setter Target="weekPanel.Width" Value="500" />
                     </VisualState.Setters>
                     <VisualState.StateTriggers>
@@ -110,7 +107,7 @@
                 </VisualState>
                 <VisualState>
                     <VisualState.Setters>
-                        <Setter Target="gridView.Width" Value="700"/>
+                        <Setter Target="daysGridView.Width" Value="700"/>
                         <Setter Target="weekPanel.Width" Value="700" />
                     </VisualState.Setters>
                     <VisualState.StateTriggers>
@@ -119,7 +116,7 @@
                 </VisualState>
                 <VisualState>
                     <VisualState.Setters>
-                        <Setter Target="gridView.Width" Value="800"/>
+                        <Setter Target="daysGridView.Width" Value="800"/>
                         <Setter Target="weekPanel.Width" Value="800" />
                     </VisualState.Setters>
                     <VisualState.StateTriggers>

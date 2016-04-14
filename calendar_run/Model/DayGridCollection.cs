@@ -51,13 +51,13 @@ namespace calendar_run.Model {
             if (year <= 0 || month < 1 || month > 12) {
                 return;
             }
-            refresh(year, month);
+            Refresh(year, month);
         }
 
         /// <summary>
         /// Initialize the contents to default.
         /// </summary>
-        public void init() {
+        public void Init() {
             for (int i = 0; i < GRID_NUM; ++i) {
                 this[i].Enable = false;
                 this[i].Day = 0;
@@ -70,8 +70,8 @@ namespace calendar_run.Model {
         /// </summary>
         /// <param name="year"></param>
         /// <param name="month"></param>
-        public void refresh(int year, int month) {
-            init();
+        public void Refresh(int year, int month) {
+            Init();
             int firstDayIndex = CalendarUtil.GetWeekOfTheFirstDay(year, month);
             int daysOfMonth = CalendarUtil.GetDaysOfMonth(year, month);
             for (int i = firstDayIndex, cnt = 0; cnt < daysOfMonth; ++i, ++cnt) {
@@ -81,8 +81,7 @@ namespace calendar_run.Model {
             Year = year;
             Month = month;
             FirstDayIndex = firstDayIndex;
-            // Update contents event
-            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+            NotifyDataSetChanged();
         }
 
         /// <summary>
@@ -94,6 +93,14 @@ namespace calendar_run.Model {
                 return;
             }
             this[FirstDayIndex + todoItem.Date.Day - 1].TodoItem = todoItem;
+            NotifyDataSetChanged();
+        }
+
+        /// <summary>
+        /// Trigger an event to notify collection changed.
+        /// </summary>
+        public void NotifyDataSetChanged() {
+            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
         }
 
         /// <summary>

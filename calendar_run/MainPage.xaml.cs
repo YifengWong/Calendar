@@ -27,11 +27,11 @@ namespace calendar_run {
         }
 
         private void AppBarButtonBack_Click(object sender, RoutedEventArgs e) {
-            ViewModel.refreshToLastMonth();
+            ViewModel.RefreshToLastMonth();
         }
 
         private void AppBarButtonNext_Click(object sender, RoutedEventArgs e) {
-            ViewModel.refreshToNextMonth();
+            ViewModel.RefreshToNextMonth();
         }
     }
 }
