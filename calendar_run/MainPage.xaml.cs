@@ -32,7 +32,9 @@ namespace calendar_run {
                 TodoItem = item
             };
 
-            textBlock.Text = grid.ToString();   
+            DayGridCollection coll = new DayGridCollection();
+
+            textBlock.Text = coll.ToString();   
         }
 
     }

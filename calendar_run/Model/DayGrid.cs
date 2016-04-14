@@ -9,8 +9,8 @@ namespace calendar_run.Model {
     /// Present one specific day grid in a calendar
     /// </summary>
     public class DayGrid {
-        public bool Enable { get; set; }
-        public int Day { get; set; }
+        public bool Enable { get; set; } = false;
+        public int Day { get; set; } = 0;
         public TodoItem TodoItem { get; set; } = null;
 
         public override string ToString() {
