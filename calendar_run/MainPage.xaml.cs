@@ -1,4 +1,5 @@
 ﻿using calendar_run.Model;
+using calendar_run.Util;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -32,9 +33,9 @@ namespace calendar_run {
                 TodoItem = item
             };
 
-            DayGridCollection coll = new DayGridCollection();
+            DayGridCollection coll = new DayGridCollection(2016, 3);
 
-            textBlock.Text = coll.ToString();   
+            textBlock.Text = coll.ToString();
         }
 
     }

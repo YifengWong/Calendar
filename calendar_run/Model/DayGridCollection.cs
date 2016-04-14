@@ -1,4 +1,5 @@
-﻿using System;
+﻿using calendar_run.Util;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -15,10 +16,7 @@ namespace calendar_run.Model {
 
         public DayGridCollection() {
             for (int i = 0; i < GRID_NUM; ++i) {
-                Add(new DayGrid() {
-                    Enable = true,
-                    Day = i + 1
-                });
+                Add(new DayGrid());
             }
         }
 
@@ -32,7 +30,12 @@ namespace calendar_run.Model {
         /// <param name="year"></param>
         /// <param name="month"></param>
         public void refresh(int year, int month) {
-
+            int startWeek = CalendarUtil.GetWeekOfTheFirstDay(year, month);
+            int daysOfMonth = CalendarUtil.GetDaysOfMonth(year, month);
+            for (int i = startWeek, cnt = 0; cnt < daysOfMonth; ++i, ++cnt) {
+                this[i].Day = cnt + 1;
+                this[i].Enable = true;
+            }
         }
 
         public override string ToString() {
