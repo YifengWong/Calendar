@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace calendar_run.Model {
+    /// <summary>
+    /// Present one specific to-do item.
+    /// </summary>
     public class TodoItem {
         public DateTime Date { get; set; }
         public string Title { get; set; }

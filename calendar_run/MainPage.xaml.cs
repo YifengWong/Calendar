@@ -25,7 +25,14 @@ namespace calendar_run {
                 Title = "Title1",
                 Details = "Details1"
             };
-            textBlock.Text = item.ToString();   
+
+            DayGrid grid = new DayGrid {
+                Day = 1,
+                Enable = true,
+                TodoItem = item
+            };
+
+            textBlock.Text = grid.ToString();   
         }
 
     }
