@@ -13,6 +13,19 @@ namespace calendar_run.Model {
         public string Title { get; set; }
         public string Details { get; set; }
 
+        public TodoItem() {
+            Reset();
+        }
+
+        /// <summary>
+        /// Reset the properties to the origin.
+        /// </summary>
+        public void Reset() {
+            Date = DateTime.Today;
+            Title = "";
+            Details = "";
+        }
+
         /// <summary>
         /// Override ToString() to show messages about the object.
         /// </summary>

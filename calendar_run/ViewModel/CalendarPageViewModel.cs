@@ -15,13 +15,14 @@ namespace calendar_run.ViewModel {
         public DayGridCollection DayGrids { get; set; } = null;
         public WeekCollection Weeks { get; set; } = null;
 
-        /// <summary>
-        /// Default constructor.
-        /// Initialize DayGrids with current year and month.
-        /// </summary>
         public CalendarPageViewModel() {
             DateTime today = DateTime.Today;
             DayGrids = new DayGridCollection(today.Year, today.Month);
+            Weeks = new WeekCollection();
+        }
+
+        public CalendarPageViewModel(int year, int month) {
+            DayGrids = new DayGridCollection(year, month);
             Weeks = new WeekCollection();
         }
 

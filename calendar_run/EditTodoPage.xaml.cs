@@ -35,7 +35,7 @@ namespace calendar_run {
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e) {
-            Frame.Navigate(typeof(CalendarPage));
+            Frame.Navigate(typeof(CalendarPage), ViewModel);
         }
     }
 }

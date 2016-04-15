@@ -61,7 +61,7 @@ namespace calendar_run.Model {
             for (int i = 0; i < GRID_NUM; ++i) {
                 this[i].Enable = false;
                 this[i].Day = 0;
-                this[i].TodoItem = null;
+                this[i].TodoItem.Reset();
             }
         }
 
@@ -70,7 +70,7 @@ namespace calendar_run.Model {
         /// </summary>
         public void ClearAllTodoItem() {
             for (int i = 0; i < GRID_NUM; ++i) {
-                this[i].TodoItem = null;
+                this[i].TodoItem.Reset();
             }
         }
 
@@ -80,9 +80,9 @@ namespace calendar_run.Model {
         public void LoadAllTodoItem() {
             // TODO Load todo items from db
             // Use some temporary data for debugging first
-            DateTime date1 = DateTime.Today;
-            DateTime date2 = date1.AddDays(2);
-            DateTime date3 = date2.AddDays(2);
+            DateTime date1 = new DateTime(Year, Month, 10);
+            DateTime date2 = date1.AddDays(3);
+            DateTime date3 = date2.AddDays(3);
 
             TodoItem item1 = new TodoItem() {
                 Date = date1,
@@ -123,7 +123,6 @@ namespace calendar_run.Model {
             Year = year;
             Month = month;
             FirstDayIndex = firstDayIndex;
-            ClearAllTodoItem();
             LoadAllTodoItem();
         }
 
@@ -132,6 +131,10 @@ namespace calendar_run.Model {
         /// </summary>
         /// <param name="todoItem"></param>
         public void Bind(TodoItem todoItem) {
+            if (todoItem == null) {
+                return;
+            }
+
             if (todoItem.Date.Year != Year || todoItem.Date.Month != Month) {
                 return;
             }
@@ -143,10 +146,14 @@ namespace calendar_run.Model {
         /// </summary>
         /// <param name="todoItem"></param>
         public void Unbind(TodoItem todoItem) {
+            if (todoItem == null) {
+                return;
+            }
+
             if (todoItem.Date.Year != Year || todoItem.Date.Month != Month) {
                 return;
             }
-            this[FirstDayIndex + todoItem.Date.Day - 1].TodoItem = null;
+            this[FirstDayIndex + todoItem.Date.Day - 1].TodoItem.Reset();
         }
 
         /// <summary>

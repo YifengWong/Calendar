@@ -22,20 +22,20 @@
                 Margin="10,0,0,0"
                 VerticalAlignment="Center">
                 <TextBlock
-                    Text="{x:Bind ViewModel.Year, Mode=OneWay}"      
+                    Text="{x:Bind ViewModel.Year}"      
                     Style="{StaticResource HeaderTxt}"/>
                 <TextBlock
                     Text="年"
                     Style="{StaticResource HeaderTxt}"/>
                 <TextBlock
-                    Text="{x:Bind ViewModel.Month, Mode=OneWay}"
+                    Text="{x:Bind ViewModel.Month}"
                     Style="{StaticResource HeaderTxt}"
                     Margin="10,0,0,0"/>
                 <TextBlock
                     Text="月"
                     Style="{StaticResource HeaderTxt}"/>
                 <TextBlock
-                    Text="{x:Bind ViewModel.Day, Mode=OneWay}"
+                    Text="{x:Bind ViewModel.Day}"
                     Style="{StaticResource HeaderTxt}"
                     Margin="10,0,0,0"/>
                 <TextBlock

@@ -11,7 +11,7 @@ namespace calendar_run.Model {
     public class DayGrid {
         public bool Enable { get; set; } = false;
         public int Day { get; set; } = 0;
-        public TodoItem TodoItem { get; set; } = null;
+        public TodoItem TodoItem { get; set; } = new TodoItem();
 
         /// <summary>
         /// Override ToString() to show messages about the object.

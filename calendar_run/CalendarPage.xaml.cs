@@ -23,7 +23,15 @@ namespace calendar_run {
 
         public CalendarPage() {
             this.InitializeComponent();
-            ViewModel = new CalendarPageViewModel();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e) {
+            EditTodoPageViewModel vm = e.Parameter as EditTodoPageViewModel;
+            if (vm != null) {  // Navigated from EditTodoPage
+                ViewModel = new CalendarPageViewModel(vm.Year, vm.Month);
+            } else {
+                ViewModel = new CalendarPageViewModel();
+            }
         }
 
         private void AppBarButtonBack_Click(object sender, RoutedEventArgs e) {
@@ -37,6 +45,10 @@ namespace calendar_run {
         private void CalendarGridView_ItemClick(object sender, ItemClickEventArgs e) {
             // Get clicked item
             DayGrid grid = e.ClickedItem as DayGrid;
+
+            if (!grid.Enable) {
+                return;
+            }
 
             // Create a view model for EditTodoPage
             EditTodoPageViewModel vm = new EditTodoPageViewModel() {
