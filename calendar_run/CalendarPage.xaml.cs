@@ -18,10 +18,10 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 namespace calendar_run {
-    public sealed partial class MainPage : Page {
+    public sealed partial class CalendarPage : Page {
         private DayGridsViewModel ViewModel;
 
-        public MainPage() {
+        public CalendarPage() {
             this.InitializeComponent();
             ViewModel = new DayGridsViewModel();
         }

@@ -151,6 +151,7 @@ namespace calendar_run.Model {
 
         /// <summary>
         /// Trigger an event to notify collection changed.
+        /// This method will cause the binded views to update.
         /// </summary>
         public void NotifyDataSetChanged() {
             OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));

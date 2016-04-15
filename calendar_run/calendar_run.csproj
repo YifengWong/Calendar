@@ -101,8 +101,8 @@
     </Compile>
     <Compile Include="Converter\BoolToVisibility.cs" />
     <Compile Include="Converter\TotalWidthToGridWidth.cs" />
-    <Compile Include="MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
+    <Compile Include="CalendarPage.xaml.cs">
+      <DependentUpon>CalendarPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\DayGrid.cs" />
     <Compile Include="Model\DayGridCollection.cs" />
@@ -134,7 +134,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainPage.xaml">
+    <Page Include="CalendarPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
