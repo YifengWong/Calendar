@@ -78,33 +78,10 @@ namespace calendar_run.Model {
         /// Load TodoItems of current year and month from storage
         /// </summary>
         public void LoadAllTodoItem() {
-            // TODO Load todo items from db
-            // Use some temporary data for debugging first
-            DateTime date1 = new DateTime(Year, Month, 10);
-            DateTime date2 = date1.AddDays(3);
-            DateTime date3 = date2.AddDays(3);
-
-            TodoItem item1 = new TodoItem() {
-                Date = date1,
-                Title = "Do cleaning",
-                Details = "As soon as possible"
-            };
-
-            TodoItem item2 = new TodoItem() {
-                Date = date2,
-                Title = "Do studying",
-                Details = "As smart as possible"
-            };
-
-            TodoItem item3 = new TodoItem() {
-                Date = date3,
-                Title = "Do playing",
-                Details = "As happy as possible"
-            };
-
-            Bind(item1);
-            Bind(item2);
-            Bind(item3);
+            List<TodoItem> res = TodoItem.GetItems(Year, Month);
+            foreach (TodoItem item in res) {
+                Bind(item);
+            }
         }
 
         /// <summary>

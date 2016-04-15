@@ -34,8 +34,18 @@ namespace calendar_run {
             }
         }
 
-        private void BackButton_Click(object sender, RoutedEventArgs e) {
+        private void GoBack() {
             Frame.Navigate(typeof(CalendarPage), ViewModel);
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e) {
+            GoBack();
+        }
+
+        private void AcceptButton_Click(object sender, RoutedEventArgs e) {
+            ViewModel.TodoItem.Title = titleTxt.Text;
+            ViewModel.TodoItem.Details = detailsTxt.Text;
+            GoBack();
         }
     }
 }

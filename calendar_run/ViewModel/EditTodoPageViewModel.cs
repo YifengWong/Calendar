@@ -10,7 +10,7 @@ namespace calendar_run.ViewModel {
     /// ViewModel for EditTodoPage.
     /// </summary>
     public class EditTodoPageViewModel {
-        public TodoItem Item { get; set; } = null;
+        public TodoItem TodoItem { get; set; } = null;
         public int Year { get; set; }
         public int Month { get; set; }
         public int Day { get; set; }

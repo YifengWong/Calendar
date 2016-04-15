@@ -44,5 +44,26 @@
             </StackPanel>
         </StackPanel>
         
+        <!-- Content -->
+        <StackPanel
+            Orientation="Vertical"
+            Width="400">
+            <TextBox
+                x:Name="titleTxt"
+                Header="Title"
+                Margin="0,12,0,0"
+                Text="{x:Bind ViewModel.TodoItem.Title}"/>
+            <TextBox
+                x:Name="detailsTxt"
+                Height="100"
+                Margin="0,12,0,0"
+                Header="Details"
+                Text="{x:Bind ViewModel.TodoItem.Details}"/>
+            <AppBarButton 
+                Icon="Accept"
+                IsCompact="True"
+                Margin="0,20,0,0"
+                HorizontalAlignment="Right" Click="AcceptButton_Click"/>
+        </StackPanel>
     </StackPanel>
 </Page>

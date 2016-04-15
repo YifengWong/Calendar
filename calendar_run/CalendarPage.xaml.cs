@@ -52,7 +52,7 @@ namespace calendar_run {
 
             // Create a view model for EditTodoPage
             EditTodoPageViewModel vm = new EditTodoPageViewModel() {
-                Item = grid.TodoItem,
+                TodoItem = grid.TodoItem,
                 Year = ViewModel.DayGrids.Year,
                 Month = ViewModel.DayGrids.Month,
                 Day = grid.Day
