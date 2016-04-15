@@ -11,7 +11,7 @@ namespace calendar_run.ViewModel {
     /// <summary>
     /// ViewModel for DayGrid collection in MainPage.
     /// </summary>
-    public class DayGridsViewModel {
+    public class CalendarPageViewModel {
         public DayGridCollection DayGrids { get; set; } = null;
         public WeekCollection Weeks { get; set; } = null;
 
@@ -19,7 +19,7 @@ namespace calendar_run.ViewModel {
         /// Default constructor.
         /// Initialize DayGrids with current year and month.
         /// </summary>
-        public DayGridsViewModel() {
+        public CalendarPageViewModel() {
             DateTime today = DateTime.Today;
             DayGrids = new DayGridCollection(today.Year, today.Month);
             Weeks = new WeekCollection();

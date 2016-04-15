@@ -1,0 +1,47 @@
+﻿<Page
+    x:Class="calendar_run.EditTodoPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:calendar_run"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        
+        <!-- Title -->
+        <!--<StackPanel
+            Orientation="Horizontal"
+            Margin="0,0,0,30">
+            <AppBarButton
+                Icon="Back"
+                IsCompact="True"
+                VerticalAlignment="Center"/>
+            <StackPanel
+                Orientation="Horizontal"
+                VerticalAlignment="Center">
+                <TextBlock
+                    Text="{x:Bind ViewModel.DayGrids.Year, Mode=OneWay}"      
+                    Style="{StaticResource HeaderTxt}"/>
+                <TextBlock
+                    Text="年"
+                    Style="{StaticResource HeaderTxt}"/>
+                <TextBlock
+                    Text="{x:Bind ViewModel.DayGrids.Month, Mode=OneWay}"
+                    Style="{StaticResource HeaderTxt}"
+                    Margin="10,0,0,0"/>
+                <TextBlock
+                    Text="月"
+                    Style="{StaticResource HeaderTxt}"/>
+                <TextBlock
+                    Text="{x:Bind ViewModel.DayGrids.Month, Mode=OneWay}"
+                    Style="{StaticResource HeaderTxt}"
+                    Margin="10,0,0,0"/>
+                <TextBlock
+                    Text="日"
+                    Style="{StaticResource HeaderTxt}"/>
+            </StackPanel>
+        </StackPanel>-->
+        
+    </StackPanel>
+</Page>

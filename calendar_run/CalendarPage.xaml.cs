@@ -19,11 +19,11 @@ using Windows.UI.Xaml.Navigation;
 
 namespace calendar_run {
     public sealed partial class CalendarPage : Page {
-        private DayGridsViewModel ViewModel;
+        private CalendarPageViewModel ViewModel;
 
         public CalendarPage() {
             this.InitializeComponent();
-            ViewModel = new DayGridsViewModel();
+            ViewModel = new CalendarPageViewModel();
         }
 
         private void AppBarButtonBack_Click(object sender, RoutedEventArgs e) {
