@@ -20,8 +20,8 @@ namespace calendar_run.ViewModel {
         /// Initialize DayGrids with current year and month.
         /// </summary>
         public DayGridsViewModel() {
-            DateTime now = DateTime.Now;
-            DayGrids = new DayGridCollection(now.Year, now.Month);
+            DateTime today = DateTime.Today;
+            DayGrids = new DayGridCollection(today.Year, today.Month);
             Weeks = new WeekCollection();
         }
 
@@ -32,6 +32,7 @@ namespace calendar_run.ViewModel {
         /// <param name="month"></param>
         public void Refresh(int year, int month) {
             DayGrids.Refresh(year, month);
+            DayGrids.NotifyDataSetChanged();
         }
 
         /// <summary>
