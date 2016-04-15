@@ -79,7 +79,9 @@
 
             <!-- Calendar content -->
             <GridView
-                ItemsSource="{x:Bind ViewModel.DayGrids}" >
+                ItemsSource="{x:Bind ViewModel.DayGrids}"
+                ItemClick="CalendarGridView_ItemClick"
+                IsItemClickEnabled="True">
                 <GridView.ItemTemplate>
                     <DataTemplate x:DataType="model:DayGrid">
                         <UserControl>

@@ -10,38 +10,39 @@
     <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         
         <!-- Title -->
-        <!--<StackPanel
+        <StackPanel
             Orientation="Horizontal"
             Margin="0,0,0,30">
             <AppBarButton
                 Icon="Back"
                 IsCompact="True"
-                VerticalAlignment="Center"/>
+                VerticalAlignment="Center" Click="BackButton_Click"/>
             <StackPanel
                 Orientation="Horizontal"
+                Margin="10,0,0,0"
                 VerticalAlignment="Center">
                 <TextBlock
-                    Text="{x:Bind ViewModel.DayGrids.Year, Mode=OneWay}"      
+                    Text="{x:Bind ViewModel.Year, Mode=OneWay}"      
                     Style="{StaticResource HeaderTxt}"/>
                 <TextBlock
                     Text="年"
                     Style="{StaticResource HeaderTxt}"/>
                 <TextBlock
-                    Text="{x:Bind ViewModel.DayGrids.Month, Mode=OneWay}"
+                    Text="{x:Bind ViewModel.Month, Mode=OneWay}"
                     Style="{StaticResource HeaderTxt}"
                     Margin="10,0,0,0"/>
                 <TextBlock
                     Text="月"
                     Style="{StaticResource HeaderTxt}"/>
                 <TextBlock
-                    Text="{x:Bind ViewModel.DayGrids.Month, Mode=OneWay}"
+                    Text="{x:Bind ViewModel.Day, Mode=OneWay}"
                     Style="{StaticResource HeaderTxt}"
                     Margin="10,0,0,0"/>
                 <TextBlock
                     Text="日"
                     Style="{StaticResource HeaderTxt}"/>
             </StackPanel>
-        </StackPanel>-->
+        </StackPanel>
         
     </StackPanel>
 </Page>

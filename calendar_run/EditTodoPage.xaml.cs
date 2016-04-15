@@ -1,4 +1,5 @@
-﻿using System;
+﻿using calendar_run.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -20,8 +21,21 @@ namespace calendar_run {
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     public sealed partial class EditTodoPage : Page {
+        private EditTodoPageViewModel ViewModel = null;
+
         public EditTodoPage() {
             this.InitializeComponent();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e) {
+            EditTodoPageViewModel vm = e.Parameter as EditTodoPageViewModel;
+            if (e != null) {
+                ViewModel = vm;
+            }
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e) {
+            Frame.Navigate(typeof(CalendarPage));
         }
     }
 }

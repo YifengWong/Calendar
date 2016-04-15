@@ -115,6 +115,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\CalendarUtil.cs" />
     <Compile Include="ViewModel\CalendarPageViewModel.cs" />
+    <Compile Include="ViewModel\EditTodoPageViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

@@ -19,7 +19,7 @@ using Windows.UI.Xaml.Navigation;
 
 namespace calendar_run {
     public sealed partial class CalendarPage : Page {
-        private CalendarPageViewModel ViewModel;
+        private CalendarPageViewModel ViewModel = null;
 
         public CalendarPage() {
             this.InitializeComponent();
@@ -32,6 +32,21 @@ namespace calendar_run {
 
         private void AppBarButtonNext_Click(object sender, RoutedEventArgs e) {
             ViewModel.RefreshToNextMonth();
+        }
+
+        private void CalendarGridView_ItemClick(object sender, ItemClickEventArgs e) {
+            // Get clicked item
+            DayGrid grid = e.ClickedItem as DayGrid;
+
+            // Create a view model for EditTodoPage
+            EditTodoPageViewModel vm = new EditTodoPageViewModel() {
+                Item = grid.TodoItem,
+                Year = ViewModel.DayGrids.Year,
+                Month = ViewModel.DayGrids.Month,
+                Day = grid.Day
+            };
+
+            Frame.Navigate(typeof(EditTodoPage), vm);
         }
     }
 }

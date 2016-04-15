@@ -9,7 +9,7 @@ using Windows.UI.Xaml;
 
 namespace calendar_run.ViewModel {
     /// <summary>
-    /// ViewModel for DayGrid collection in MainPage.
+    /// ViewModel for CalendarPage.
     /// </summary>
     public class CalendarPageViewModel {
         public DayGridCollection DayGrids { get; set; } = null;
