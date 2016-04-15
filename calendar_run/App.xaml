@@ -6,18 +6,22 @@
     RequestedTheme="Light">
 
     <Application.Resources>
+        
+        <!--Title text style-->
         <Style x:Key="HeaderTextBlockStyle" TargetType="TextBlock">
             <Setter Property="FontSize" Value="25"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="Foreground" Value="Black" />
         </Style>
 
+        <!--Week text style-->
         <Style x:Key="WeekTextBlockStyle" TargetType="TextBlock">
             <Setter Property="FontSize" Value="17"/>
             <Setter Property="FontWeight" Value="Normal"/>
             <Setter Property="Foreground" Value="Blue" />
         </Style>
 
+        <!--Grid text style-->
         <Style x:Key="DayGridTextBlockStyle" TargetType="TextBlock">
             <Setter Property="FontSize" Value="17"/>
             <Setter Property="FontWeight" Value="Normal"/>

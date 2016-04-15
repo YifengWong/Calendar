@@ -13,7 +13,7 @@ namespace calendar_run.ViewModel {
     /// </summary>
     public class DayGridsViewModel {
         public DayGridCollection DayGrids { get; set; } = null;
-        public ObservableCollection<Week> Weeks { get; set; } = null;
+        public WeekCollection Weeks { get; set; } = null;
 
         /// <summary>
         /// Default constructor.
@@ -22,21 +22,7 @@ namespace calendar_run.ViewModel {
         public DayGridsViewModel() {
             DateTime now = DateTime.Now;
             DayGrids = new DayGridCollection(now.Year, now.Month);
-            InitWeeks();
-        }
-
-        /// <summary>
-        /// Initialize weeks collection
-        /// </summary>
-        private void InitWeeks() {
-            Weeks = new ObservableCollection<Week>();
-            Weeks.Add(new Week("Mon"));
-            Weeks.Add(new Week("Tue"));
-            Weeks.Add(new Week("Wed"));
-            Weeks.Add(new Week("Thu"));
-            Weeks.Add(new Week("Fri"));
-            Weeks.Add(new Week("Sat"));
-            Weeks.Add(new Week("Sun"));
+            Weeks = new WeekCollection();
         }
 
         /// <summary>
