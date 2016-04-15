@@ -35,17 +35,17 @@
                 VerticalAlignment="Center">
                 <TextBlock
                     Text="{x:Bind ViewModel.DayGrids.Year, Mode=OneWay}"      
-                    Style="{StaticResource HeaderTextBlockStyle}"/>
+                    Style="{StaticResource HeaderTxt}"/>
                 <TextBlock
                     Text="年"
-                    Style="{StaticResource HeaderTextBlockStyle}"/>
+                    Style="{StaticResource HeaderTxt}"/>
                 <TextBlock
                     Text="{x:Bind ViewModel.DayGrids.Month, Mode=OneWay}"
-                    Style="{StaticResource HeaderTextBlockStyle}"
+                    Style="{StaticResource HeaderTxt}"
                     Margin="10,0,0,0"/>
                 <TextBlock
                     Text="月"
-                    Style="{StaticResource HeaderTextBlockStyle}"/>
+                    Style="{StaticResource HeaderTxt}"/>
             </StackPanel>
             <AppBarButton 
                 Icon="Forward"
@@ -70,7 +70,7 @@
                             <TextBlock
                                 Text="{x:Bind Name}"
                                 HorizontalAlignment="Right"
-                                Style="{StaticResource WeekTextBlockStyle}"/>
+                                Style="{StaticResource WeekTxt}"/>
                         </StackPanel>
                     </DataTemplate>
                 </GridView.ItemTemplate>
@@ -81,24 +81,72 @@
                 ItemsSource="{x:Bind ViewModel.DayGrids}" >
                 <GridView.ItemTemplate>
                     <DataTemplate x:DataType="model:DayGrid">
-                        <StackPanel
-                            x:Name="gridPanel"
-                            Orientation="Vertical"
-                            Width="{Binding Width, ElementName=contentPanel, Converter={StaticResource TotalWidthToGridWidth}}"
-                            Height="{Binding Width, ElementName=gridPanel}">
-                            <TextBlock
-                                Text="{x:Bind Day}"
-                                HorizontalAlignment="Right"
-                                Margin="0,5,5,0"
-                                Style="{StaticResource DayGridTextBlockStyle}"
-                                Visibility="{x:Bind Enable, Converter={StaticResource BoolToVisibility}}"/>
-                        </StackPanel>
+                        <UserControl>
+                            <StackPanel
+                                x:Name="gridPanel"
+                                Orientation="Vertical"
+                                Width="{Binding Width, ElementName=contentPanel, Converter={StaticResource TotalWidthToGridWidth}}"
+                                Height="{Binding Width, ElementName=gridPanel}">
+                                <TextBlock
+                                    Text="{x:Bind Day}"
+                                    HorizontalAlignment="Right"
+                                    Margin="0,5,5,0"
+                                    Style="{StaticResource GridNumTxt}"
+                                    Visibility="{x:Bind Enable, Converter={StaticResource BoolToVisibility}}"/>
+                                <TextBlock
+                                    x:Name="itemTitle"
+                                    Text="{x:Bind TodoItem.Title}"
+                                    HorizontalAlignment="Left"
+                                    Margin="5,10,0,0"
+                                    Style="{StaticResource GridTitleTxt}"/>
+                                <TextBlock
+                                    x:Name="itemDetails"
+                                    Text="{x:Bind TodoItem.Details}"
+                                    HorizontalAlignment="Left"
+                                    Margin="5,5,0,0"
+                                    TextWrapping="Wrap"
+                                    Style="{StaticResource GridDetailsTxt}"/>
+
+                                <!-- Adaptive state groups (Grid contents) -->
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup>
+                                        <VisualState>
+                                            <VisualState.Setters>
+                                                <Setter Target="itemTitle.Visibility" Value="Collapsed"/>
+                                                <Setter Target="itemDetails.Visibility" Value="Collapsed"/>
+                                            </VisualState.Setters>
+                                            <VisualState.StateTriggers>
+                                                <AdaptiveTrigger MinWindowWidth="1"/>
+                                            </VisualState.StateTriggers>
+                                        </VisualState>
+                                        <VisualState>
+                                            <VisualState.Setters>
+                                                <Setter Target="itemTitle.Visibility" Value="Visible"/>
+                                                <Setter Target="itemDetails.Visibility" Value="Collapsed"/>
+                                            </VisualState.Setters>
+                                            <VisualState.StateTriggers>
+                                                <AdaptiveTrigger MinWindowWidth="700"/>
+                                            </VisualState.StateTriggers>
+                                        </VisualState>
+                                        <VisualState>
+                                            <VisualState.Setters>
+                                                <Setter Target="itemTitle.Visibility" Value="Visibile"/>
+                                                <Setter Target="itemDetails.Visibility" Value="Visibile"/>
+                                            </VisualState.Setters>
+                                            <VisualState.StateTriggers>
+                                                <AdaptiveTrigger MinWindowWidth="800"/>
+                                            </VisualState.StateTriggers>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                            </StackPanel>
+                        </UserControl>
                     </DataTemplate>
                 </GridView.ItemTemplate>
             </GridView>
         </StackPanel>
        
-        <!-- Adaptive state groups -->
+        <!-- Adaptive state groups (Grid size) -->
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
                 <VisualState>

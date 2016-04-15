@@ -8,25 +8,40 @@
     <Application.Resources>
         
         <!--Title text style-->
-        <Style x:Key="HeaderTextBlockStyle" TargetType="TextBlock">
+        <Style x:Key="HeaderTxt" TargetType="TextBlock">
             <Setter Property="FontSize" Value="25"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="Foreground" Value="Black" />
         </Style>
 
         <!--Week text style-->
-        <Style x:Key="WeekTextBlockStyle" TargetType="TextBlock">
+        <Style x:Key="WeekTxt" TargetType="TextBlock">
             <Setter Property="FontSize" Value="17"/>
             <Setter Property="FontWeight" Value="Normal"/>
             <Setter Property="Foreground" Value="Blue" />
         </Style>
 
-        <!--Grid text style-->
-        <Style x:Key="DayGridTextBlockStyle" TargetType="TextBlock">
+        <!--Grid number text style-->
+        <Style x:Key="GridNumTxt" TargetType="TextBlock">
             <Setter Property="FontSize" Value="17"/>
             <Setter Property="FontWeight" Value="Normal"/>
             <Setter Property="Foreground" Value="Black" />
         </Style>
+        
+        <!--Grid title text style-->
+        <Style x:Key="GridTitleTxt" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="Foreground" Value="Black" />
+        </Style>
+        
+        <!--Grid details text style-->
+        <Style x:Key="GridDetailsTxt" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="Foreground" Value="Black" />
+        </Style>
+        
     </Application.Resources>
 
 </Application>
