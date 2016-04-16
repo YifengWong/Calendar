@@ -24,7 +24,9 @@ namespace calendar_run.Util {
                             (Id VARCHAR(100) PRIMARY KEY,
                              Title VARCHAR(20),
                              Details VARCHAR(100),
-                             Date VARCHAR(50));";
+                             Year INT,
+                             Month INT,
+                             Day INT);";
 
             db = new SQLiteConnection("Calendar.db");
             using (var statement = db.Prepare(sql)) {

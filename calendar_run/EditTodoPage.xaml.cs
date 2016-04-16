@@ -41,10 +41,12 @@ namespace calendar_run {
         }
 
         private void AcceptButton_Click(object sender, RoutedEventArgs e) {
-            if (titleTxt.Text.Length > 0 && detailsTxt.Text.Length > 0) {
+            if (titleTxt.Text.Length > 0) {  // Require the title text not empty
                 ViewModel.TodoItem.Title = titleTxt.Text;
                 ViewModel.TodoItem.Details = detailsTxt.Text;
-                ViewModel.TodoItem.Date = new DateTime(ViewModel.Year, ViewModel.Month, ViewModel.Day);
+                ViewModel.TodoItem.Year = ViewModel.Year;
+                ViewModel.TodoItem.Month = ViewModel.Month;
+                ViewModel.TodoItem.Day = ViewModel.Day;
                 ViewModel.TodoItem.Save();
             }
             GoBack();

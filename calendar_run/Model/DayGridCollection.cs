@@ -112,10 +112,10 @@ namespace calendar_run.Model {
                 return;
             }
 
-            if (todoItem.Date.Year != Year || todoItem.Date.Month != Month) {
+            if (todoItem.Year != Year || todoItem.Month != Month) {
                 return;
             }
-            this[FirstDayIndex + todoItem.Date.Day - 1].TodoItem = todoItem;
+            this[FirstDayIndex + todoItem.Day - 1].TodoItem = todoItem;
         }
 
         /// <summary>
@@ -127,10 +127,10 @@ namespace calendar_run.Model {
                 return;
             }
 
-            if (todoItem.Date.Year != Year || todoItem.Date.Month != Month) {
+            if (todoItem.Year != Year || todoItem.Month != Month) {
                 return;
             }
-            this[FirstDayIndex + todoItem.Date.Day - 1].TodoItem.Reset();
+            this[FirstDayIndex + todoItem.Day - 1].TodoItem.Reset();
         }
 
         /// <summary>

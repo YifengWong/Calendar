@@ -11,7 +11,9 @@ namespace calendar_run.Model {
     /// </summary>
     public class TodoItem {
         public string Id { get; set; }
-        public DateTime Date { get; set; }
+        public int Year { get; set; }
+        public int Month { get; set; }
+        public int Day { get; set; }
         public string Title { get; set; }
         public string Details { get; set; }
 
@@ -23,10 +25,12 @@ namespace calendar_run.Model {
         /// Reset the properties to the origin.
         /// </summary>
         public void Reset() {
-            Date = DateTime.Today;
+            Id = "";
+            Year = 0;
+            Month = 0;
+            Day = 0;
             Title = "";
             Details = "";
-            Id = "";
         }
 
         /// <summary>
@@ -35,21 +39,29 @@ namespace calendar_run.Model {
         public void Save() {
             if (Id.Length == 0) {  // New Item
                 Id = Guid.NewGuid().ToString();
-                string sql = "INSERT INTO Todo (Id, Title, Details, Date) VALUES (?, ?, ?, ?)";
+                string sql = @"INSERT INTO Todo
+                              (Id, Title, Details, Year, Month, Day)
+                              VALUES (?, ?, ?, ?, ?, ?)";
                 using (var statement = DBConnection.GetDB().Prepare(sql)) {
                     statement.Bind(1, Id);
                     statement.Bind(2, Title);
                     statement.Bind(3, Details);
-                    statement.Bind(4, Date.ToString());
+                    statement.Bind(4, Year);
+                    statement.Bind(5, Month);
+                    statement.Bind(6, Day);
                     statement.Step();
                 }
             } else {  // Existed item
-                string sql = "UPDATE Todo SET Title = ?, Details = ?, Date = ? WHERE Id = ?";
+                string sql = @"UPDATE Todo
+                               SET Title = ?, Details = ?, Year = ?, Month = ?, Day = ?
+                               WHERE Id = ?";
                 using (var statement = DBConnection.GetDB().Prepare(sql)) {
                     statement.Bind(1, Title);
                     statement.Bind(2, Details);
-                    statement.Bind(3, Date.ToString());
-                    statement.Bind(4, Id);
+                    statement.Bind(3, Year);
+                    statement.Bind(4, Month);
+                    statement.Bind(5, Day);
+                    statement.Bind(6, Id);
                     statement.Step();
                 }
             }
@@ -65,32 +77,48 @@ namespace calendar_run.Model {
         public static List<TodoItem> GetItems(int year, int month) {
             List<TodoItem> res = new List<TodoItem>();
 
+            string sql = @"SELECT Id, Title, Details, Year, Month, Day
+                           FROM Todo
+                           WHERE Year = ? AND Month = ?";
+            using (var statement = DBConnection.GetDB().Prepare(sql)) {
+                statement.Bind(1, year);
+                statement.Bind(2, month);
+                while (statement.Step() != SQLitePCL.SQLiteResult.DONE) {
+                    TodoItem newItem = new TodoItem {
+                        Id = statement[0] as string,
+                        Title = statement[1] as string,
+                        Details = statement[2] as string,
+                        Year = Convert.ToInt32(statement[3]),
+                        Month = Convert.ToInt32(statement[4]),
+                        Day = Convert.ToInt32(statement[5])
+                    };
+                    res.Add(newItem);
+                }
+            }
+
             // Use some temp data first
-            DateTime date1 = new DateTime(year, month, 10);
-            DateTime date2 = date1.AddDays(3);
-            DateTime date3 = date2.AddDays(3);
+            //DateTime date1 = new DateTime(year, month, 10);
+            //DateTime date2 = date1.AddDays(3);
+            //DateTime date3 = date2.AddDays(3);
 
-            TodoItem item1 = new TodoItem() {
-                Date = date1,
-                Title = "Do cleaning",
-                Details = "As soon as possible"
-            };
+            //TodoItem item1 = new TodoItem() {
+            //    Year = 2016,
+            //    Month = 4,
+            //    Day = 5,
+            //    Title = "Do cleaning",
+            //    Details = "As soon as possible"
+            //};
 
-            TodoItem item2 = new TodoItem() {
-                Date = date2,
-                Title = "Do studying",
-                Details = "As smart as possible"
-            };
+            //TodoItem item2 = new TodoItem() {
+            //    Year = 2016,
+            //    Month = 5,
+            //    Day = 6,
+            //    Title = "Do studying",
+            //    Details = "As smart as possible"
+            //};
 
-            TodoItem item3 = new TodoItem() {
-                Date = date3,
-                Title = "Do playing",
-                Details = "As happy as possible"
-            };
-
-            res.Add(item1);
-            res.Add(item2);
-            res.Add(item3);
+            //res.Add(item1);
+            //res.Add(item2);
 
             return res;
         }
@@ -104,8 +132,12 @@ namespace calendar_run.Model {
             sb.Append(Title);
             sb.Append(", Details: ");
             sb.Append(Details);
-            sb.Append(", Date: ");
-            sb.Append(Date.ToString());
+            sb.Append(", Year: ");
+            sb.Append(Year);
+            sb.Append(", Month: ");
+            sb.Append(Month);
+            sb.Append(", Day: ");
+            sb.Append(Day);
             sb.Append(" }");
             return sb.ToString();
         }
