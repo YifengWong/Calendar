@@ -68,6 +68,18 @@ namespace calendar_run.Model {
         }
 
         /// <summary>
+        /// Remove the TodoItem from db.
+        /// Remove by id.
+        /// </summary>
+        public void Remove() {
+            string sql = @"DELETE FROM Todo WHERE Id = ?";
+            using (var statement = DBConnection.GetDB().Prepare(sql)) {
+                statement.Bind(1, Id);
+                statement.Step();
+            }
+        }
+
+        /// <summary>
         /// Get items in the specific month and year from the db
         /// TODO Get TodoItems from database
         /// </summary>
@@ -95,30 +107,6 @@ namespace calendar_run.Model {
                     res.Add(newItem);
                 }
             }
-
-            // Use some temp data first
-            //DateTime date1 = new DateTime(year, month, 10);
-            //DateTime date2 = date1.AddDays(3);
-            //DateTime date3 = date2.AddDays(3);
-
-            //TodoItem item1 = new TodoItem() {
-            //    Year = 2016,
-            //    Month = 4,
-            //    Day = 5,
-            //    Title = "Do cleaning",
-            //    Details = "As soon as possible"
-            //};
-
-            //TodoItem item2 = new TodoItem() {
-            //    Year = 2016,
-            //    Month = 5,
-            //    Day = 6,
-            //    Title = "Do studying",
-            //    Details = "As smart as possible"
-            //};
-
-            //res.Add(item1);
-            //res.Add(item2);
 
             return res;
         }

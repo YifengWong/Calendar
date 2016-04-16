@@ -48,6 +48,7 @@ namespace calendar_run {
                 ViewModel.TodoItem.Month = ViewModel.Month;
                 ViewModel.TodoItem.Day = ViewModel.Day;
                 ViewModel.TodoItem.Save();
+                //ViewModel.TodoItem.Remove();
             }
             GoBack();
         }
