@@ -6,8 +6,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -59,6 +61,16 @@ namespace calendar_run {
             };
 
             Frame.Navigate(typeof(EditTodoPage), vm);
+        }
+
+        private void ShowDataButton_Click(object sender, RoutedEventArgs e) {
+            List<TodoItem> items = TodoItem.GetAllItems();
+            StringBuilder sb = new StringBuilder();
+            foreach (TodoItem item in items) {
+                sb.Append(item.ToString());
+                sb.Append(Environment.NewLine);
+            }
+            var i = new MessageDialog(sb.ToString()).ShowAsync();
         }
     }
 }

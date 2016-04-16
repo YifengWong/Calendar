@@ -81,7 +81,6 @@ namespace calendar_run.Model {
 
         /// <summary>
         /// Get items in the specific month and year from the db
-        /// TODO Get TodoItems from database
         /// </summary>
         /// <param name="year"></param>
         /// <param name="month"></param>
@@ -112,11 +111,39 @@ namespace calendar_run.Model {
         }
 
         /// <summary>
+        /// Get all items from database
+        /// </summary>
+        /// <returns></returns>
+        public static List<TodoItem> GetAllItems() {
+            List<TodoItem> res = new List<TodoItem>();
+
+            string sql = @"SELECT Id, Title, Details, Year, Month, Day
+                           FROM Todo";
+            using (var statement = DBConnection.GetDB().Prepare(sql)) {
+                while (statement.Step() != SQLitePCL.SQLiteResult.DONE) {
+                    TodoItem newItem = new TodoItem {
+                        Id = statement[0] as string,
+                        Title = statement[1] as string,
+                        Details = statement[2] as string,
+                        Year = Convert.ToInt32(statement[3]),
+                        Month = Convert.ToInt32(statement[4]),
+                        Day = Convert.ToInt32(statement[5])
+                    };
+                    res.Add(newItem);
+                }
+            }
+
+            return res;
+        }
+
+        /// <summary>
         /// Override ToString() to show messages about the object.
         /// </summary>
         public override string ToString() {
             StringBuilder sb = new StringBuilder();
-            sb.Append("{ Title: ");
+            sb.Append("{ Id: ");
+            sb.Append(Id);
+            sb.Append(", Title: ");
             sb.Append(Title);
             sb.Append(", Details: ");
             sb.Append(Details);

@@ -14,6 +14,14 @@
         <converter:BoolToVisibility x:Key="BoolToVisibility" />
     </Page.Resources>
 
+    <Page.BottomAppBar>
+        <CommandBar>
+            <AppBarButton 
+                Icon="Save"
+                Label="ShowDatas" Click="ShowDataButton_Click"/>
+        </CommandBar>
+    </Page.BottomAppBar>
+
     <StackPanel
         Orientation="Vertical"
         Margin="10,10,10,10"
