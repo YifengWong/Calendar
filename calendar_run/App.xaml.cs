@@ -74,7 +74,7 @@ namespace calendar_run {
             }
 
             // Set minimum window size
-            ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(600, 700));
+            ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(600, 600));
 
             // Ensure the current window is active
             Window.Current.Activate();

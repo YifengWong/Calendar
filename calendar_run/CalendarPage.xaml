@@ -170,7 +170,7 @@
                 </VisualState>
                 <VisualState>
                     <VisualState.Setters>
-                        <Setter Target="contentPanel.Width" Value="700"/>
+                        <Setter Target="contentPanel.Width" Value="600"/>
                     </VisualState.Setters>
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="700"/>
@@ -178,7 +178,7 @@
                 </VisualState>
                 <VisualState>
                     <VisualState.Setters>
-                        <Setter Target="contentPanel.Width" Value="800"/>
+                        <Setter Target="contentPanel.Width" Value="650"/>
                     </VisualState.Setters>
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="800"/>
