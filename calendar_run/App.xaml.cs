@@ -1,4 +1,5 @@
-﻿using System;
+﻿using calendar_run.Util;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -31,6 +32,7 @@ namespace calendar_run {
                 Microsoft.ApplicationInsights.WindowsCollectors.Session);
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+            DBConnection.Init();
         }
 
         /// <summary>
