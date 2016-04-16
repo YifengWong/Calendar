@@ -29,6 +29,9 @@ namespace calendar_run {
             EditTodoPageViewModel vm = e.Parameter as EditTodoPageViewModel;
             if (e != null) {
                 ViewModel = vm;
+                if (ViewModel.TodoItem.Id.Length == 0) {
+                    deleteBtn.Visibility = Visibility.Collapsed;
+                }
             }
         }
 
@@ -50,6 +53,11 @@ namespace calendar_run {
                 ViewModel.TodoItem.Save();
                 //ViewModel.TodoItem.Remove();
             }
+            GoBack();
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e) {
+            ViewModel.TodoItem.Remove();
             GoBack();
         }
     }
