@@ -1,4 +1,5 @@
-﻿using System;
+﻿using calendar_run.Util;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,7 @@ namespace calendar_run.Model {
     /// Present one specific to-do item.
     /// </summary>
     public class TodoItem {
+        public string Id { get; set; }
         public DateTime Date { get; set; }
         public string Title { get; set; }
         public string Details { get; set; }
@@ -24,6 +26,33 @@ namespace calendar_run.Model {
             Date = DateTime.Today;
             Title = "";
             Details = "";
+            Id = "";
+        }
+
+        /// <summary>
+        /// Save the TodoItem to database.
+        /// </summary>
+        public void Save() {
+            if (Id.Length == 0) {  // New Item
+                Id = Guid.NewGuid().ToString();
+                string sql = "INSERT INTO Todo (Id, Title, Details, Date) VALUES (?, ?, ?, ?)";
+                using (var statement = DBConnection.GetDB().Prepare(sql)) {
+                    statement.Bind(1, Id);
+                    statement.Bind(2, Title);
+                    statement.Bind(3, Details);
+                    statement.Bind(4, Date.ToString());
+                    statement.Step();
+                }
+            } else {  // Existed item
+                string sql = "UPDATE Todo SET Title = ?, Details = ?, Date = ? WHERE Id = ?";
+                using (var statement = DBConnection.GetDB().Prepare(sql)) {
+                    statement.Bind(1, Title);
+                    statement.Bind(2, Details);
+                    statement.Bind(3, Date.ToString());
+                    statement.Bind(4, Id);
+                    statement.Step();
+                }
+            }
         }
 
         /// <summary>

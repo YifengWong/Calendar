@@ -41,8 +41,12 @@ namespace calendar_run {
         }
 
         private void AcceptButton_Click(object sender, RoutedEventArgs e) {
-            ViewModel.TodoItem.Title = titleTxt.Text;
-            ViewModel.TodoItem.Details = detailsTxt.Text;
+            if (titleTxt.Text.Length > 0 && detailsTxt.Text.Length > 0) {
+                ViewModel.TodoItem.Title = titleTxt.Text;
+                ViewModel.TodoItem.Details = detailsTxt.Text;
+                ViewModel.TodoItem.Date = new DateTime(ViewModel.Year, ViewModel.Month, ViewModel.Day);
+                ViewModel.TodoItem.Save();
+            }
             GoBack();
         }
     }

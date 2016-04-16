@@ -13,13 +13,18 @@ namespace calendar_run.Util {
         private static SQLiteConnection db = null;
 
         /// <summary>
-        /// Initialize the SQLiteConnection Db.
+        /// Initialize the SQLiteConnection db.
         /// </summary>
         public static void Init() {
+            if (db != null) {
+                return;
+            }
+
             string sql = @"CREATE TABLE IF NOT EXISTS Todo
                             (Id VARCHAR(100) PRIMARY KEY,
                              Title VARCHAR(20),
-                             Description VARCHAR(100));";
+                             Details VARCHAR(100),
+                             Date VARCHAR(50));";
 
             db = new SQLiteConnection("Calendar.db");
             using (var statement = db.Prepare(sql)) {
