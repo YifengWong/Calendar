@@ -1,4 +1,5 @@
-﻿using System;
+﻿using calendar_run.Util;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,19 +16,45 @@ namespace calendar_run.Model {
         /// Otherwise, it is true.
         /// Author: ChuyangLiu
         /// </summary>
-        public bool Enable { get; set; } = false;
+        public bool Enable { get; set; }
 
         /// <summary>
         /// The day number of the grid
         /// Author: ChuyangLiu
         /// </summary>
-        public int Day { get; set; } = 0;
+        public int Day { get; set; }
 
         /// <summary>
-        /// A TodoItem in this day.
+        /// TodoItem list in this day.
         /// Author: ChuyangLiu
         /// </summary>
-        public TodoItem TodoItem { get; set; } = new TodoItem();
+        public List<TodoItem> TodoItems { get; set; }
+
+        /// <summary>
+        /// Initialize fields.
+        /// Author: ChuyangLiu
+        /// </summary>
+        public DayGrid() {
+            Enable = false;
+            Day = -1;
+            TodoItems = new List<TodoItem>();
+        }
+
+        /// <summary>
+        /// Reload Todoitems in given year,month and day from db.
+        /// Author: ChuyangLiu
+        /// </summary>
+        public void ReloadItems(int year, int month) {
+            TodoItems = TodoItem.GetItems(year, month, Day);
+        }
+
+        /// <summary>
+        /// Clear all elements in TodoItems.
+        /// Author: ChuyangLiu
+        /// </summary>
+        public void ClearAllItems() {
+            TodoItems.Clear();
+        }
 
         /// <summary>
         /// Override ToString() to show messages about the object.
@@ -39,9 +66,14 @@ namespace calendar_run.Model {
             sb.Append(Enable);
             sb.Append(", Day: ");
             sb.Append(Day);
-            sb.Append(", TodoItem: ");
-            sb.Append(TodoItem == null ? "null" : TodoItem.ToString());
-            sb.Append(" }");
+            sb.Append(", TodoItems: [");
+            for (int i = 0; i < TodoItems.Count; ++i) {
+                if (i != 0) {
+                    sb.Append(", ");
+                }
+                sb.Append(TodoItems[i].ToString());
+            }
+            sb.Append("] }");
             return sb.ToString();
         }
     }

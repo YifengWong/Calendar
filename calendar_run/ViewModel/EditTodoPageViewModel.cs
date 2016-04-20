@@ -23,5 +23,14 @@ namespace calendar_run.ViewModel {
         public int Year { get; set; }
         public int Month { get; set; }
         public int Day { get; set; }
+
+        /// <summary>
+        /// Initialize fields.
+        /// Author: ChuyangLiu
+        /// </summary>
+        public EditTodoPageViewModel() {
+            TodoItem = null;
+            Year = Month = Day = -1;
+        }
     }
 }

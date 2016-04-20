@@ -1,15 +1,25 @@
 ﻿<Page
-    x:Class="calendar_run.EditTodoPage"
+    x:Class="calendar_run.TodoListPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:calendar_run"
+    xmlns:model="using:calendar_run.Model"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
+    <Page.BottomAppBar>
+        <CommandBar>
+            <AppBarButton 
+                Icon="Add"
+                Label="Add"
+                Click="AddButton_Click"/>
+        </CommandBar>
+    </Page.BottomAppBar>
+
     <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        
-         <!--Title--> 
+       
+        <!--Title-->
         <StackPanel
             Orientation="Horizontal"
             Margin="0,0,0,30">
@@ -44,35 +54,33 @@
             </StackPanel>
         </StackPanel>
         
-         <!--Content--> 
-        <StackPanel
-            Orientation="Vertical"
-            Width="400">
-            <TextBox
-                x:Name="titleTxt"
-                Header="Title"
-                Margin="0,12,0,0"
-                Text="{x:Bind ViewModel.TodoItem.Title}"/>
-            <TextBox
-                x:Name="detailsTxt"
-                Height="100"
-                Margin="0,12,0,0"
-                Header="Details"
-                Text="{x:Bind ViewModel.TodoItem.Details}"/>
-            <StackPanel
-                Orientation="Horizontal"
-                HorizontalAlignment="Right"
-                Margin="0,20,0,0">
-                <AppBarButton 
-                    x:Name="deleteBtn"
-                    Icon="Delete"
-                    IsCompact="True"
-                    Click="DeleteButton_Click"/>
-                <AppBarButton 
-                    Icon="Accept"
-                    IsCompact="True"
-                    Click="AcceptButton_Click"/>
-            </StackPanel>
-        </StackPanel>
+        <!--Content-->
+        <ListView
+            ItemsSource="{x:Bind ViewModel.TodoItems}"
+            IsItemClickEnabled="True"
+            ItemClick="ListView_ItemClick">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment"
+                                Value="Stretch"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="model:TodoItem">
+                    <UserControl>
+                        <StackPanel
+                            Orientation="Vertical">
+                            <TextBlock
+                                Text="{x:Bind Title}"
+                                Style="{StaticResource TodoListTitleTxt}"/>
+                            <TextBlock
+                                Text="{x:Bind Details}"
+                                Style="{StaticResource TodoListDetailsTxt}"/>
+                        </StackPanel>
+                    </UserControl>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </StackPanel>
 </Page>

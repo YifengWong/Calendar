@@ -42,6 +42,20 @@
             <Setter Property="Foreground" Value="Black" />
         </Style>
         
+        <!--TodoItem ListView title text style-->
+        <Style x:Key="TodoListTitleTxt" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="Foreground" Value="Black" />
+        </Style>
+
+        <!--TodoItem ListView details text style-->
+        <Style x:Key="TodoListDetailsTxt" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="Foreground" Value="Black" />
+        </Style>
+
     </Application.Resources>
 
 </Application>

@@ -22,21 +22,26 @@ namespace calendar_run.Model {
         /// Author: ChuyangLiu
         /// </summary>
         public TodoItem() {
-            Reset();
+            Id = "";
+            Year = -1;
+            Month = -1;
+            Day = -1;
+            Title = "";
+            Details = "";
         }
 
         /// <summary>
         /// Initialize the values
         /// Author: ChuyangLiu
         /// </summary>
-        public void Reset() {
-            Id = "";
-            Year = 0;
-            Month = 0;
-            Day = 0;
-            Title = "";
-            Details = "";
-        }
+        //public void Reset() {
+        //    Id = "";
+        //    Year = 0;
+        //    Month = 0;
+        //    Day = 0;
+        //    Title = "";
+        //    Details = "";
+        //}
 
         /// <summary>
         /// Save the TodoItem to database.
@@ -86,18 +91,19 @@ namespace calendar_run.Model {
         }
 
         /// <summary>
-        /// Get items in the specific month and year from the db.
+        /// Get items with the specific year,month,day from the db.
         /// Author: ChuyangLiu
         /// </summary>
-        public static List<TodoItem> GetItems(int year, int month) {
+        public static List<TodoItem> GetItems(int year, int month, int day) {
             List<TodoItem> res = new List<TodoItem>();
 
             string sql = @"SELECT Id, Title, Details, Year, Month, Day
                            FROM Todo
-                           WHERE Year = ? AND Month = ?";
+                           WHERE Year = ? AND Month = ? AND Day = ?";
             using (var statement = DBConnection.GetDB().Prepare(sql)) {
                 statement.Bind(1, year);
                 statement.Bind(2, month);
+                statement.Bind(3, day);
                 while (statement.Step() != SQLitePCL.SQLiteResult.DONE) {
                     TodoItem newItem = new TodoItem {
                         Id = statement[0] as string,

@@ -106,17 +106,19 @@
                                     Visibility="{x:Bind Enable, Converter={StaticResource BoolToVisibility}}"/>
                                 <TextBlock
                                     x:Name="itemTitle"
-                                    Text="{x:Bind TodoItem.Title}"
+                                    Text="{x:Bind TodoItems.Count}"
                                     HorizontalAlignment="Left"
                                     Margin="5,10,0,0"
-                                    Style="{StaticResource GridTitleTxt}"/>
+                                    Style="{StaticResource GridTitleTxt}"
+                                    Visibility="{x:Bind Enable, Converter={StaticResource BoolToVisibility}}"/>
                                 <TextBlock
                                     x:Name="itemDetails"
-                                    Text="{x:Bind TodoItem.Details}"
+                                    Text="{x:Bind TodoItems.Count}"
                                     HorizontalAlignment="Left"
                                     Margin="5,5,0,0"
                                     TextWrapping="Wrap"
-                                    Style="{StaticResource GridDetailsTxt}"/>
+                                    Style="{StaticResource GridDetailsTxt}"
+                                    Visibility="{x:Bind Enable, Converter={StaticResource BoolToVisibility}}"/>
 
                                 <!-- Adaptive state groups (Grid contents) -->
                                 <VisualStateManager.VisualStateGroups>

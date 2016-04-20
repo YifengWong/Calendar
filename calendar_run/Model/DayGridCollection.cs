@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace calendar_run.Model {
     /// <summary>
-    /// A DayGrid collection to present all calendar grids in a month.
+    /// An observable DayGrid collection to present all calendar grids in a month.
     /// </summary>
     public class DayGridCollection : ObservableCollection<DayGrid> {
         /// <summary>
@@ -23,25 +23,28 @@ namespace calendar_run.Model {
         /// Current year of the grids.
         /// Author: ChuyangLiu
         /// </summary>
-        public int Year { get; set; } = 0;
+        public int Year { get; set; }
 
         /// <summary>
         /// Current month of the grids.
         /// Author: ChuyangLiu
         /// </summary>
-        public int Month { get; set; } = 0;
+        public int Month { get; set; }
 
         /// <summary>
         /// The first day index of the grids
         /// Author: ChuyangLiu
         /// </summary>
-        public int FirstDayIndex { get; set; } = -1;
+        public int FirstDayIndex { get; set; }
 
         /// <summary>
         /// Initilize all grids with default constructor
         /// Author: ChuyangLiu
         /// </summary>
         public DayGridCollection() {
+            Year = -1;
+            Month = -1;
+            FirstDayIndex = -1;
             for (int i = 0; i < GRID_NUM; ++i) {
                 Add(new DayGrid());
             }
@@ -55,6 +58,11 @@ namespace calendar_run.Model {
             if (year <= 0 || month < 1 || month > 12) {
                 return;
             }
+            //Year = year;
+            //Month = month;
+            //for (int i = 0; i < GRID_NUM; ++i) {
+            //    Add(new DayGrid(year, month));
+            //}
             Refresh(year, month);
         }
 
@@ -62,11 +70,11 @@ namespace calendar_run.Model {
         /// Initialize the contents to default.
         /// Author: ChuyangLiu
         /// </summary>
-        public void Init() {
+        public void Reset() {
             for (int i = 0; i < GRID_NUM; ++i) {
                 this[i].Enable = false;
-                this[i].Day = 0;
-                this[i].TodoItem.Reset();
+                this[i].Day = -1;
+                this[i].ClearAllItems();
             }
         }
 
@@ -74,70 +82,71 @@ namespace calendar_run.Model {
         /// Clear current binded TodoItems.
         /// Author: ChuyangLiu
         /// </summary>
-        public void ClearAllTodoItem() {
-            for (int i = 0; i < GRID_NUM; ++i) {
-                this[i].TodoItem.Reset();
-            }
-        }
+        //public void ClearAllTodoItem() {
+        //    for (int i = 0; i < GRID_NUM; ++i) {
+        //        this[i].TodoItem.Reset();
+        //    }
+        //}
 
         /// <summary>
         /// Load TodoItems of current year and month from storage
         /// Author: ChuyangLiu
         /// </summary>
-        public void LoadAllTodoItem() {
-            List<TodoItem> res = TodoItem.GetItems(Year, Month);
-            foreach (TodoItem item in res) {
-                Bind(item);
-            }
-        }
+        //public void LoadAllTodoItem() {
+        //    List<TodoItem> res = TodoItem.GetItems(Year, Month);
+        //    foreach (TodoItem item in res) {
+        //        Bind(item);
+        //    }
+        //}
 
         /// <summary>
         /// Refresh the content of day grids according to year and month
         /// Author: ChuyangLiu
         /// </summary>
         public void Refresh(int year, int month) {
-            Init();
+            Reset();
             int firstDayIndex = CalendarUtil.GetWeekOfTheFirstDay(year, month);
             int daysOfMonth = CalendarUtil.GetDaysOfMonth(year, month);
             for (int i = firstDayIndex, cnt = 0; cnt < daysOfMonth; ++i, ++cnt) {
                 this[i].Day = cnt + 1;
                 this[i].Enable = true;
+                this[i].ReloadItems(year, month);
             }
             Year = year;
             Month = month;
             FirstDayIndex = firstDayIndex;
-            LoadAllTodoItem();
+            //LoadAllTodoItem();
         }
 
         /// <summary>
         /// Bind a TodoItem with the corresponding grid.
         /// Author: ChuyangLiu
         /// </summary>
-        public void Bind(TodoItem todoItem) {
-            if (todoItem == null) {
-                return;
-            }
+        //public void Bind(TodoItem todoItem) {
+        //    if (todoItem == null) {
+        //        return;
+        //    }
 
-            if (todoItem.Year != Year || todoItem.Month != Month) {
-                return;
-            }
-            this[FirstDayIndex + todoItem.Day - 1].TodoItem = todoItem;
-        }
+        //    if (todoItem.Year != Year || todoItem.Month != Month) {
+        //        return;
+        //    }
+        //    this[FirstDayIndex + todoItem.Day - 1].TodoItem = todoItem;
+        //}
 
         /// <summary>
         /// Unbind a TodoItem from the calendar view.
         /// Author: ChuyangLiu
         /// </summary>
-        public void Unbind(TodoItem todoItem) {
-            if (todoItem == null) {
-                return;
-            }
+        //public void Unbind(TodoItem todoItem) {
+        //    if (todoItem == null) {
+        //        return;
+        //    }
 
-            if (todoItem.Year != Year || todoItem.Month != Month) {
-                return;
-            }
-            this[FirstDayIndex + todoItem.Day - 1].TodoItem.Reset();
-        }
+        //    if (todoItem.Year != Year || todoItem.Month != Month) {
+        //        return;
+        //    }
+        //    this[FirstDayIndex + todoItem.Day - 1].TodoItem.Reset();
+        //}
 
         /// <summary>
         /// Trigger an event to notify collection changed.

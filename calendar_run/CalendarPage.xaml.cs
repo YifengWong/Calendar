@@ -39,7 +39,7 @@ namespace calendar_run {
         /// Author: ChuyangLiu
         /// </summary>
         protected override void OnNavigatedTo(NavigationEventArgs e) {
-            EditTodoPageViewModel vm = e.Parameter as EditTodoPageViewModel;
+            TodoListPageViewModel vm = e.Parameter as TodoListPageViewModel;
             if (vm != null) {  // Navigated from EditTodoPage
                 ViewModel = new CalendarPageViewModel(vm.Year, vm.Month);
             } else {  // First open
@@ -75,15 +75,15 @@ namespace calendar_run {
                 return;
             }
 
-            // Create a view model for EditTodoPage
-            EditTodoPageViewModel vm = new EditTodoPageViewModel() {
-                TodoItem = grid.TodoItem,
+            // Create a view model for TodoListPage
+            TodoListPageViewModel vm = new TodoListPageViewModel() {
                 Year = ViewModel.DayGrids.Year,
                 Month = ViewModel.DayGrids.Month,
-                Day = grid.Day
+                Day = grid.Day,
+                TodoItems = null
             };
 
-            Frame.Navigate(typeof(EditTodoPage), vm);
+            Frame.Navigate(typeof(TodoListPage), vm);
         }
 
         /// <summary>

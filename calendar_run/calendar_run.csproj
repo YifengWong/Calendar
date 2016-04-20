@@ -109,13 +109,18 @@
     <Compile Include="Model\DayGrid.cs" />
     <Compile Include="Model\DayGridCollection.cs" />
     <Compile Include="Model\TodoItem.cs" />
+    <Compile Include="Model\TodoItemCollection.cs" />
     <Compile Include="Model\Week.cs" />
     <Compile Include="Model\WeekCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TodoListPage.xaml.cs">
+      <DependentUpon>TodoListPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Util\CalendarUtil.cs" />
     <Compile Include="Util\DBConnection.cs" />
     <Compile Include="ViewModel\CalendarPageViewModel.cs" />
     <Compile Include="ViewModel\EditTodoPageViewModel.cs" />
+    <Compile Include="ViewModel\TodoListPageViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -143,6 +148,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="EditTodoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TodoListPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
