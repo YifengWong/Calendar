@@ -29,16 +29,5 @@ namespace calendar_run.Model {
                 Add(item);
             }
         }
-
-        /// <summary>
-        /// Initialize TodoItems list with given year, month and day.
-        /// Author: ChuyangLiu
-        /// </summary>
-        //public TodoItemCollection(int year, int month, int day) {
-        //    List<TodoItem> res = TodoItem.GetItems(year, month, day);
-        //    foreach (TodoItem item in res) {
-        //        Add(item);
-        //    }
-        //}
     }
 }

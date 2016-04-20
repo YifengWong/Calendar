@@ -29,29 +29,22 @@
         </Style>
         
         <!--Grid title text style-->
-        <Style x:Key="GridTitleTxt" TargetType="TextBlock">
+        <Style x:Key="GridItemsNumTxt" TargetType="TextBlock">
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="FontWeight" Value="Normal"/>
             <Setter Property="Foreground" Value="Black" />
         </Style>
-        
-        <!--Grid details text style-->
-        <Style x:Key="GridDetailsTxt" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="13"/>
-            <Setter Property="FontWeight" Value="Normal"/>
-            <Setter Property="Foreground" Value="Black" />
-        </Style>
-        
+
         <!--TodoItem ListView title text style-->
         <Style x:Key="TodoListTitleTxt" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontSize" Value="20"/>
             <Setter Property="FontWeight" Value="Normal"/>
             <Setter Property="Foreground" Value="Black" />
         </Style>
 
         <!--TodoItem ListView details text style-->
         <Style x:Key="TodoListDetailsTxt" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontSize" Value="16"/>
             <Setter Property="FontWeight" Value="Normal"/>
             <Setter Property="Foreground" Value="Black" />
         </Style>

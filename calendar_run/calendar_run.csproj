@@ -99,6 +99,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converter\BoolToVisibility.cs" />
+    <Compile Include="Converter\IntToVisibility.cs" />
     <Compile Include="Converter\TotalWidthToGridWidth.cs" />
     <Compile Include="CalendarPage.xaml.cs">
       <DependentUpon>CalendarPage.xaml</DependentUpon>

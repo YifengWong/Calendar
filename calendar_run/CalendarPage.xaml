@@ -12,6 +12,7 @@
     <Page.Resources>
         <converter:TotalWidthToGridWidth x:Key="TotalWidthToGridWidth" />
         <converter:BoolToVisibility x:Key="BoolToVisibility" />
+        <converter:IntToVisibility x:Key="IntToVisibility" />
     </Page.Resources>
 
     <Page.BottomAppBar>
@@ -101,57 +102,16 @@
                                 <TextBlock
                                     Text="{x:Bind Day}"
                                     HorizontalAlignment="Right"
+                                    VerticalAlignment="Top"
                                     Margin="0,5,5,0"
                                     Style="{StaticResource GridNumTxt}"
                                     Visibility="{x:Bind Enable, Converter={StaticResource BoolToVisibility}}"/>
                                 <TextBlock
-                                    x:Name="itemTitle"
                                     Text="{x:Bind TodoItems.Count}"
                                     HorizontalAlignment="Left"
-                                    Margin="5,10,0,0"
-                                    Style="{StaticResource GridTitleTxt}"
-                                    Visibility="{x:Bind Enable, Converter={StaticResource BoolToVisibility}}"/>
-                                <TextBlock
-                                    x:Name="itemDetails"
-                                    Text="{x:Bind TodoItems.Count}"
-                                    HorizontalAlignment="Left"
-                                    Margin="5,5,0,0"
-                                    TextWrapping="Wrap"
-                                    Style="{StaticResource GridDetailsTxt}"
-                                    Visibility="{x:Bind Enable, Converter={StaticResource BoolToVisibility}}"/>
-
-                                <!-- Adaptive state groups (Grid contents) -->
-                                <VisualStateManager.VisualStateGroups>
-                                    <VisualStateGroup>
-                                        <VisualState>
-                                            <VisualState.Setters>
-                                                <Setter Target="itemTitle.Visibility" Value="Collapsed"/>
-                                                <Setter Target="itemDetails.Visibility" Value="Collapsed"/>
-                                            </VisualState.Setters>
-                                            <VisualState.StateTriggers>
-                                                <AdaptiveTrigger MinWindowWidth="1"/>
-                                            </VisualState.StateTriggers>
-                                        </VisualState>
-                                        <VisualState>
-                                            <VisualState.Setters>
-                                                <Setter Target="itemTitle.Visibility" Value="Visible"/>
-                                                <Setter Target="itemDetails.Visibility" Value="Collapsed"/>
-                                            </VisualState.Setters>
-                                            <VisualState.StateTriggers>
-                                                <AdaptiveTrigger MinWindowWidth="700"/>
-                                            </VisualState.StateTriggers>
-                                        </VisualState>
-                                        <VisualState>
-                                            <VisualState.Setters>
-                                                <Setter Target="itemTitle.Visibility" Value="Visibile"/>
-                                                <Setter Target="itemDetails.Visibility" Value="Visibile"/>
-                                            </VisualState.Setters>
-                                            <VisualState.StateTriggers>
-                                                <AdaptiveTrigger MinWindowWidth="800"/>
-                                            </VisualState.StateTriggers>
-                                        </VisualState>
-                                    </VisualStateGroup>
-                                </VisualStateManager.VisualStateGroups>
+                                    Margin="8,28,0,0"
+                                    Style="{StaticResource GridItemsNumTxt}"
+                                    Visibility="{x:Bind TodoItems.Count, Converter={StaticResource IntToVisibility}, Mode=OneWay}"/>
                             </StackPanel>
                         </UserControl>
                     </DataTemplate>

@@ -31,19 +31,6 @@ namespace calendar_run.Model {
         }
 
         /// <summary>
-        /// Initialize the values
-        /// Author: ChuyangLiu
-        /// </summary>
-        //public void Reset() {
-        //    Id = "";
-        //    Year = 0;
-        //    Month = 0;
-        //    Day = 0;
-        //    Title = "";
-        //    Details = "";
-        //}
-
-        /// <summary>
         /// Save the TodoItem to database.
         /// Author: ChuyangLiu
         /// </summary>

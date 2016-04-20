@@ -58,11 +58,6 @@ namespace calendar_run.Model {
             if (year <= 0 || month < 1 || month > 12) {
                 return;
             }
-            //Year = year;
-            //Month = month;
-            //for (int i = 0; i < GRID_NUM; ++i) {
-            //    Add(new DayGrid(year, month));
-            //}
             Refresh(year, month);
         }
 
@@ -77,27 +72,6 @@ namespace calendar_run.Model {
                 this[i].ClearAllItems();
             }
         }
-
-        /// <summary>
-        /// Clear current binded TodoItems.
-        /// Author: ChuyangLiu
-        /// </summary>
-        //public void ClearAllTodoItem() {
-        //    for (int i = 0; i < GRID_NUM; ++i) {
-        //        this[i].TodoItem.Reset();
-        //    }
-        //}
-
-        /// <summary>
-        /// Load TodoItems of current year and month from storage
-        /// Author: ChuyangLiu
-        /// </summary>
-        //public void LoadAllTodoItem() {
-        //    List<TodoItem> res = TodoItem.GetItems(Year, Month);
-        //    foreach (TodoItem item in res) {
-        //        Bind(item);
-        //    }
-        //}
 
         /// <summary>
         /// Refresh the content of day grids according to year and month
@@ -115,38 +89,7 @@ namespace calendar_run.Model {
             Year = year;
             Month = month;
             FirstDayIndex = firstDayIndex;
-            //LoadAllTodoItem();
         }
-
-        /// <summary>
-        /// Bind a TodoItem with the corresponding grid.
-        /// Author: ChuyangLiu
-        /// </summary>
-        //public void Bind(TodoItem todoItem) {
-        //    if (todoItem == null) {
-        //        return;
-        //    }
-
-        //    if (todoItem.Year != Year || todoItem.Month != Month) {
-        //        return;
-        //    }
-        //    this[FirstDayIndex + todoItem.Day - 1].TodoItem = todoItem;
-        //}
-
-        /// <summary>
-        /// Unbind a TodoItem from the calendar view.
-        /// Author: ChuyangLiu
-        /// </summary>
-        //public void Unbind(TodoItem todoItem) {
-        //    if (todoItem == null) {
-        //        return;
-        //    }
-
-        //    if (todoItem.Year != Year || todoItem.Month != Month) {
-        //        return;
-        //    }
-        //    this[FirstDayIndex + todoItem.Day - 1].TodoItem.Reset();
-        //}
 
         /// <summary>
         /// Trigger an event to notify collection changed.
