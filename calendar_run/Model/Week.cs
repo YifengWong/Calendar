@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace calendar_run.Model {
     /// <summary>
-    /// Present a week number.
+    /// Present a week name.
     /// </summary>
     public class Week {
         public string Name { get; set; }

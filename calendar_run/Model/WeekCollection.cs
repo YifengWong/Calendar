@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace calendar_run.Model {
     /// <summary>
-    /// A collection contains seven week numbers
+    /// A collection contains seven week names.
     /// </summary>
     public class WeekCollection : ObservableCollection<Week> {
         public WeekCollection() {

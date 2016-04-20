@@ -16,15 +16,23 @@ using Windows.UI.Xaml.Navigation;
 
 namespace calendar_run {
     /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// Page to edit a TodoItem
     /// </summary>
     public sealed partial class EditTodoPage : Page {
         private EditTodoPageViewModel ViewModel = null;
 
+        /// <summary>
+        /// Initialize.
+        /// Author: ChuyangLiu
+        /// </summary>
         public EditTodoPage() {
             this.InitializeComponent();
         }
 
+        /// <summary>
+        /// Override OnNavigatedTo.
+        /// Author: ChuyangLiu
+        /// </summary>
         protected override void OnNavigatedTo(NavigationEventArgs e) {
             EditTodoPageViewModel vm = e.Parameter as EditTodoPageViewModel;
             if (e != null) {
@@ -34,15 +42,27 @@ namespace calendar_run {
                 }
             }
         }
-
+        
+        /// <summary>
+        /// Go to previous page.
+        /// Author: ChuyangLiu
+        /// </summary>
         private void GoBack() {
             Frame.Navigate(typeof(CalendarPage), ViewModel);
         }
 
+        /// <summary>
+        /// Back button click event.
+        /// Author: ChuyangLiu
+        /// </summary>
         private void BackButton_Click(object sender, RoutedEventArgs e) {
             GoBack();
         }
 
+        /// <summary>
+        /// Accept button click event.
+        /// Author: ChuyangLiu
+        /// </summary>
         private void AcceptButton_Click(object sender, RoutedEventArgs e) {
             if (titleTxt.Text.Length > 0) {  // Require the title text not empty
                 ViewModel.TodoItem.Title = titleTxt.Text;
@@ -56,6 +76,10 @@ namespace calendar_run {
             GoBack();
         }
 
+        /// <summary>
+        /// Delete button click event.
+        /// Author: ChuyangLiu
+        /// </summary>
         private void DeleteButton_Click(object sender, RoutedEventArgs e) {
             ViewModel.TodoItem.Remove();
             GoBack();

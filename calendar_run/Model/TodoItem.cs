@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace calendar_run.Model {
     /// <summary>
-    /// Present one specific to-do item.
+    /// Present one specific todo item.
     /// </summary>
     public class TodoItem {
         public string Id { get; set; }
@@ -17,12 +17,17 @@ namespace calendar_run.Model {
         public string Title { get; set; }
         public string Details { get; set; }
 
+        /// <summary>
+        /// Initialize fields.
+        /// Author: ChuyangLiu
+        /// </summary>
         public TodoItem() {
             Reset();
         }
 
         /// <summary>
-        /// Reset the properties to the origin.
+        /// Initialize the values
+        /// Author: ChuyangLiu
         /// </summary>
         public void Reset() {
             Id = "";
@@ -35,6 +40,7 @@ namespace calendar_run.Model {
 
         /// <summary>
         /// Save the TodoItem to database.
+        /// Author: ChuyangLiu
         /// </summary>
         public void Save() {
             if (Id.Length == 0) {  // New Item
@@ -69,7 +75,7 @@ namespace calendar_run.Model {
 
         /// <summary>
         /// Remove the TodoItem from db.
-        /// Remove by id.
+        /// Author: ChuyangLiu
         /// </summary>
         public void Remove() {
             string sql = @"DELETE FROM Todo WHERE Id = ?";
@@ -80,11 +86,9 @@ namespace calendar_run.Model {
         }
 
         /// <summary>
-        /// Get items in the specific month and year from the db
+        /// Get items in the specific month and year from the db.
+        /// Author: ChuyangLiu
         /// </summary>
-        /// <param name="year"></param>
-        /// <param name="month"></param>
-        /// <returns></returns>
         public static List<TodoItem> GetItems(int year, int month) {
             List<TodoItem> res = new List<TodoItem>();
 
@@ -112,8 +116,8 @@ namespace calendar_run.Model {
 
         /// <summary>
         /// Get all items from database
+        /// Author: ChuyangLiu
         /// </summary>
-        /// <returns></returns>
         public static List<TodoItem> GetAllItems() {
             List<TodoItem> res = new List<TodoItem>();
 
@@ -138,6 +142,7 @@ namespace calendar_run.Model {
 
         /// <summary>
         /// Override ToString() to show messages about the object.
+        /// Author: ChuyangLiu
         /// </summary>
         public override string ToString() {
             StringBuilder sb = new StringBuilder();

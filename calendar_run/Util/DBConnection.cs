@@ -10,10 +10,15 @@ namespace calendar_run.Util {
     /// A class to connect the local database.
     /// </summary>
     public class DBConnection {
+        /// <summary>
+        /// The database instance.
+        /// Author: ChuyangLiu
+        /// </summary>
         private static SQLiteConnection db = null;
 
         /// <summary>
         /// Initialize the SQLiteConnection db.
+        /// Author: ChuyangLiu
         /// </summary>
         public static void Init() {
             if (db != null) {
@@ -36,8 +41,8 @@ namespace calendar_run.Util {
 
         /// <summary>
         /// Get the db instance
+        /// Author: ChuyangLiu
         /// </summary>
-        /// <returns></returns>
         public static SQLiteConnection GetDB() {
             return db;
         }

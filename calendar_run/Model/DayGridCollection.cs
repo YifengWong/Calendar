@@ -15,26 +15,31 @@ namespace calendar_run.Model {
         /// <summary>
         /// A calendar has at most 42 grids,
         /// that is, 6 rows and 7 columns.
+        /// Author: ChuyangLiu
         /// </summary>
         private static readonly int GRID_NUM = 6 * 7;
 
         /// <summary>
         /// Current year of the grids.
+        /// Author: ChuyangLiu
         /// </summary>
         public int Year { get; set; } = 0;
 
         /// <summary>
         /// Current month of the grids.
+        /// Author: ChuyangLiu
         /// </summary>
         public int Month { get; set; } = 0;
 
         /// <summary>
         /// The first day index of the grids
+        /// Author: ChuyangLiu
         /// </summary>
         public int FirstDayIndex { get; set; } = -1;
 
         /// <summary>
         /// Initilize all grids with default constructor
+        /// Author: ChuyangLiu
         /// </summary>
         public DayGridCollection() {
             for (int i = 0; i < GRID_NUM; ++i) {
@@ -44,9 +49,8 @@ namespace calendar_run.Model {
 
         /// <summary>
         /// Initialize all grids with specific year and month
+        /// Author: ChuyangLiu
         /// </summary>
-        /// <param name="year"></param>
-        /// <param name="month"></param>
         public DayGridCollection(int year, int month) : this() {
             if (year <= 0 || month < 1 || month > 12) {
                 return;
@@ -56,6 +60,7 @@ namespace calendar_run.Model {
 
         /// <summary>
         /// Initialize the contents to default.
+        /// Author: ChuyangLiu
         /// </summary>
         public void Init() {
             for (int i = 0; i < GRID_NUM; ++i) {
@@ -67,6 +72,7 @@ namespace calendar_run.Model {
 
         /// <summary>
         /// Clear current binded TodoItems.
+        /// Author: ChuyangLiu
         /// </summary>
         public void ClearAllTodoItem() {
             for (int i = 0; i < GRID_NUM; ++i) {
@@ -76,6 +82,7 @@ namespace calendar_run.Model {
 
         /// <summary>
         /// Load TodoItems of current year and month from storage
+        /// Author: ChuyangLiu
         /// </summary>
         public void LoadAllTodoItem() {
             List<TodoItem> res = TodoItem.GetItems(Year, Month);
@@ -86,9 +93,8 @@ namespace calendar_run.Model {
 
         /// <summary>
         /// Refresh the content of day grids according to year and month
+        /// Author: ChuyangLiu
         /// </summary>
-        /// <param name="year"></param>
-        /// <param name="month"></param>
         public void Refresh(int year, int month) {
             Init();
             int firstDayIndex = CalendarUtil.GetWeekOfTheFirstDay(year, month);
@@ -104,9 +110,9 @@ namespace calendar_run.Model {
         }
 
         /// <summary>
-        /// Bind a TodoItem with the corresponding grid
+        /// Bind a TodoItem with the corresponding grid.
+        /// Author: ChuyangLiu
         /// </summary>
-        /// <param name="todoItem"></param>
         public void Bind(TodoItem todoItem) {
             if (todoItem == null) {
                 return;
@@ -119,9 +125,9 @@ namespace calendar_run.Model {
         }
 
         /// <summary>
-        /// Unbind a TodoItem from the calendar view
+        /// Unbind a TodoItem from the calendar view.
+        /// Author: ChuyangLiu
         /// </summary>
-        /// <param name="todoItem"></param>
         public void Unbind(TodoItem todoItem) {
             if (todoItem == null) {
                 return;
@@ -136,6 +142,7 @@ namespace calendar_run.Model {
         /// <summary>
         /// Trigger an event to notify collection changed.
         /// This method will cause the binded views to update.
+        /// Author: ChuyangLiu
         /// </summary>
         public void NotifyDataSetChanged() {
             OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
@@ -143,6 +150,7 @@ namespace calendar_run.Model {
 
         /// <summary>
         /// Override ToString() to show messages about the object.
+        /// Author: ChuyangLiu
         /// </summary>
         public override string ToString() {
             StringBuilder sb = new StringBuilder();

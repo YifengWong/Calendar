@@ -20,30 +20,53 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 namespace calendar_run {
+    /// <summary>
+    /// Page to show the calendar view.
+    /// </summary>
     public sealed partial class CalendarPage : Page {
         private CalendarPageViewModel ViewModel = null;
 
+        /// <summary>
+        /// Initialize.
+        /// Author: ChuyangLiu
+        /// </summary>
         public CalendarPage() {
             this.InitializeComponent();
         }
 
+        /// <summary>
+        /// Override OnNavigatedTo.
+        /// Author: ChuyangLiu
+        /// </summary>
         protected override void OnNavigatedTo(NavigationEventArgs e) {
             EditTodoPageViewModel vm = e.Parameter as EditTodoPageViewModel;
             if (vm != null) {  // Navigated from EditTodoPage
                 ViewModel = new CalendarPageViewModel(vm.Year, vm.Month);
-            } else {
+            } else {  // First open
                 ViewModel = new CalendarPageViewModel();
             }
         }
 
+        /// <summary>
+        /// Back button click event.
+        /// Author: ChuyangLiu
+        /// </summary>
         private void AppBarButtonBack_Click(object sender, RoutedEventArgs e) {
             ViewModel.RefreshToLastMonth();
         }
 
+        /// <summary>
+        /// Next button click event.
+        /// Author: ChuyangLiu
+        /// </summary>
         private void AppBarButtonNext_Click(object sender, RoutedEventArgs e) {
             ViewModel.RefreshToNextMonth();
         }
 
+        /// <summary>
+        /// GridView item click event.
+        /// Author: ChuyangLiu
+        /// </summary>
         private void CalendarGridView_ItemClick(object sender, ItemClickEventArgs e) {
             // Get clicked item
             DayGrid grid = e.ClickedItem as DayGrid;
@@ -63,6 +86,11 @@ namespace calendar_run {
             Frame.Navigate(typeof(EditTodoPage), vm);
         }
 
+        /// <summary>
+        /// Show data button click event.
+        /// Click to show the datas in database (for fast debugging).
+        /// Author: ChuyangLiu
+        /// </summary>
         private void ShowDataButton_Click(object sender, RoutedEventArgs e) {
             List<TodoItem> items = TodoItem.GetAllItems();
             StringBuilder sb = new StringBuilder();
