@@ -107,11 +107,12 @@
                                     Style="{StaticResource GridNumTxt}"
                                     Visibility="{x:Bind Enable, Converter={StaticResource BoolToVisibility}}"/>
                                 <TextBlock
+                                    x:Name="itemsNumTxt"
                                     Text="{x:Bind TodoItems.Count}"
                                     HorizontalAlignment="Left"
-                                    Margin="8,28,0,0"
+                                    Margin="10,14,0,0"
                                     Style="{StaticResource GridItemsNumTxt}"
-                                    Visibility="{x:Bind TodoItems.Count, Converter={StaticResource IntToVisibility}, Mode=OneWay}"/>
+                                    Visibility="{x:Bind TodoItems.Count, Converter={StaticResource IntToVisibility}}"/>
                             </StackPanel>
                         </UserControl>
                     </DataTemplate>

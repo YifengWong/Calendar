@@ -28,11 +28,11 @@
             <Setter Property="Foreground" Value="Black" />
         </Style>
         
-        <!--Grid title text style-->
+        <!--Grid items number text style-->
         <Style x:Key="GridItemsNumTxt" TargetType="TextBlock">
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="FontWeight" Value="Normal"/>
-            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="Foreground" Value="Red" />
         </Style>
 
         <!--TodoItem ListView title text style-->
