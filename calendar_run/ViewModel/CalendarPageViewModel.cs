@@ -17,7 +17,7 @@ namespace calendar_run.ViewModel {
         /// Author: ChuyangLiu
         /// </summary>
         public DayGridCollection DayGrids { get; set; } = null;
-
+     
         /// <summary>
         /// Title weeks name in a calendar.
         /// Author: ChuyangLiu

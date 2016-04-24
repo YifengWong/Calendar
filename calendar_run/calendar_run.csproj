@@ -11,7 +11,7 @@
     <AssemblyName>calendar_run</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.10586.0</TargetPlatformVersion>
+    <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
@@ -119,6 +119,7 @@
     </Compile>
     <Compile Include="Util\CalendarUtil.cs" />
     <Compile Include="Util\DBConnection.cs" />
+    <Compile Include="Util\TileXml.cs" />
     <Compile Include="ViewModel\CalendarPageViewModel.cs" />
     <Compile Include="ViewModel\EditTodoPageViewModel.cs" />
     <Compile Include="ViewModel\TodoListPageViewModel.cs" />

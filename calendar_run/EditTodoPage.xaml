@@ -63,15 +63,29 @@
                 Orientation="Horizontal"
                 HorizontalAlignment="Right"
                 Margin="0,20,0,0">
+                <AppBarButton
+                    x:Name="UpdateTileBtn"
+                    Icon="SetTile"
+                    IsCompact="True"
+                    Click="UpdateTileBtn_Click"
+                    Label="Add this item to tile"/>
+                <AppBarButton
+                    x:Name="ShareBtn"
+                    Icon="Send"
+                    IsCompact="True"
+                    Click="ShareBtn_Click"
+                    Label="Share the item"/>
                 <AppBarButton 
                     x:Name="deleteBtn"
                     Icon="Delete"
                     IsCompact="True"
-                    Click="DeleteButton_Click"/>
+                    Click="DeleteButton_Click"
+                    Label="Delete the item"/>
                 <AppBarButton 
                     Icon="Accept"
                     IsCompact="True"
-                    Click="AcceptButton_Click"/>
+                    Click="AcceptButton_Click"
+                    Label="Finish"/>
             </StackPanel>
         </StackPanel>
     </StackPanel>

@@ -5,8 +5,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.ApplicationModel.DataTransfer;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -21,6 +23,9 @@ namespace calendar_run {
     /// </summary>
     public sealed partial class EditTodoPage : Page {
         private EditTodoPageViewModel ViewModel = null;
+
+        //For Share event
+        DataTransferManager dtm;
 
         /// <summary>
         /// Initialize.
@@ -44,9 +49,15 @@ namespace calendar_run {
             // Update delete button visibility
             if (ViewModel.TodoItem == null) {
                 deleteBtn.Visibility = Visibility.Collapsed;
+                ShareBtn.Visibility = Visibility.Collapsed;
             } else {
                 deleteBtn.Visibility = Visibility.Visible;
+                ShareBtn.Visibility = Visibility.Visible;
             }
+
+            //Add event handler
+            dtm = DataTransferManager.GetForCurrentView();
+            dtm.DataRequested += dtm_DataRequested;
         }
 
         /// <summary>
@@ -100,5 +111,60 @@ namespace calendar_run {
             }
             GoBack();
         }
+
+        /// <summary>
+        /// Share button click event.
+        /// Author: YifengWong
+        /// </summary>
+        private void ShareBtn_Click(object sender, RoutedEventArgs e) {
+            DataTransferManager.ShowShareUI();
+        }
+
+        /// <summary>
+        /// Update tile button
+        /// Author: YifengWong
+        /// </summary>
+        private void UpdateTileBtn_Click(object sender, RoutedEventArgs e) {
+            var xml = new Windows.Data.Xml.Dom.XmlDocument();
+
+            string x = calendar_run.Util.TileXml.XmlString;
+            x = x.Replace("titleWhat", titleTxt.Text);
+            x = x.Replace("detailsWhat", detailsTxt.Text);
+            xml.LoadXml(x);
+
+            var updator = TileUpdateManager.CreateTileUpdaterForApplication();
+            var notification = new TileNotification(xml);
+            updator.Update(notification);
+        }
+
+        /// <summary>
+        /// For event handler
+        /// Author: YifengWong
+        /// </summary>
+        private void dtm_DataRequested(DataTransferManager sender, DataRequestedEventArgs args) {
+            //创建DataPackage对象，并设置相应属性
+            string ShareTitle = titleTxt.Text;
+            string ShareDate = ViewModel.Year.ToString() + "/" +
+                                ViewModel.Month.ToString() + "/" +
+                                ViewModel.Day.ToString();
+            string ShareDetails = detailsTxt.Text + "\n" + ShareDate;
+            string textDescription = "Share Schedule";
+
+            DataPackage data = args.Request.Data;
+            data.Properties.Title = ShareTitle;
+            data.Properties.Description = textDescription;
+            data.SetText(ShareDetails);
+
+        }
+
+        /// <summary>
+        /// Delete the event
+        /// Author: YifengWong
+        /// </summary>
+        protected override void OnNavigatedFrom(NavigationEventArgs e) {
+            base.OnNavigatedFrom(e);
+            dtm.DataRequested -= dtm_DataRequested;
+        }
+        
     }
 }
