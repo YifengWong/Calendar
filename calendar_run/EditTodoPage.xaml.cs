@@ -50,9 +50,11 @@ namespace calendar_run {
             if (ViewModel.TodoItem == null) {
                 deleteBtn.Visibility = Visibility.Collapsed;
                 ShareBtn.Visibility = Visibility.Collapsed;
+                UpdateTileBtn.Visibility = Visibility.Collapsed;
             } else {
                 deleteBtn.Visibility = Visibility.Visible;
                 ShareBtn.Visibility = Visibility.Visible;
+                UpdateTileBtn.Visibility = Visibility.Visible;
             }
 
             //Add event handler

@@ -26,6 +26,9 @@ namespace calendar_run {
     public sealed partial class CalendarPage : Page {
         private CalendarPageViewModel ViewModel = null;
 
+        // For the adaptive UI
+        private TodoListPageViewModel listVM = null;
+
         /// <summary>
         /// Initialize.
         /// Author: ChuyangLiu
@@ -45,6 +48,15 @@ namespace calendar_run {
             } else {  // First open
                 ViewModel = new CalendarPageViewModel();
             }
+
+            // Initial the list date
+            listVM = new TodoListPageViewModel() {
+                Year = DateTime.Today.Year,
+                Month = DateTime.Today.Month,
+                Day = DateTime.Today.Day,
+                TodoItems = null
+            };
+            listVM.ReloadItems();
         }
 
         /// <summary>
@@ -74,7 +86,6 @@ namespace calendar_run {
             if (!grid.Enable) {
                 return;
             }
-
             // Create a view model for TodoListPage
             TodoListPageViewModel vm = new TodoListPageViewModel() {
                 Year = ViewModel.DayGrids.Year,
@@ -84,6 +95,7 @@ namespace calendar_run {
             };
 
             Frame.Navigate(typeof(TodoListPage), vm);
+
         }
 
         /// <summary>
@@ -99,6 +111,21 @@ namespace calendar_run {
                 sb.Append(Environment.NewLine);
             }
             var i = new MessageDialog(sb.ToString()).ShowAsync();
+        }
+
+        /// <summary>
+        /// Click the item of Today and Edit it
+        /// Author: YifengWong
+        /// </summary>
+        private void ListView_ItemClick(object sender, ItemClickEventArgs e) {
+            TodoItem item = e.ClickedItem as TodoItem;
+            EditTodoPageViewModel vm = new EditTodoPageViewModel {
+                TodoItem = item,
+                Year = listVM.Year,
+                Month = listVM.Month,
+                Day = listVM.Day
+            };
+            Frame.Navigate(typeof(EditTodoPage), vm);
         }
     }
 }

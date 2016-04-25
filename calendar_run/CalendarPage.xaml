@@ -23,109 +23,192 @@
         </CommandBar>
     </Page.BottomAppBar>
 
-    <StackPanel
-        Orientation="Vertical"
-        Margin="10,10,10,10"
-        Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        
-        <!-- Title -->
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
         <StackPanel
-            Orientation="Horizontal"
-            HorizontalAlignment="Center"
-            Margin="0,0,0,30">
-            <AppBarButton
-                Icon="Back"
-                IsCompact="True"
-                Margin="0,0,40,0"
-                VerticalAlignment="Center"
-                Click="AppBarButtonBack_Click"/>
+            x:Name="ListPanel"
+            BorderThickness="5, 0, 0, 0"
+            BorderBrush="AliceBlue"
+            Grid.Column="1"
+            Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+            <!--Title-->
             <StackPanel
+            Orientation="Horizontal"
+            Margin="0,10,0,30">
+                <StackPanel
                 Orientation="Horizontal"
+                Margin="10,0,0,0"
                 VerticalAlignment="Center">
-                <TextBlock
-                    Text="{x:Bind ViewModel.DayGrids.Year, Mode=OneWay}"      
+                    <TextBlock
+                    Text="{x:Bind listVM.Year}"      
                     Style="{StaticResource HeaderTxt}"/>
-                <TextBlock
+                    <TextBlock
                     Text="年"
                     Style="{StaticResource HeaderTxt}"/>
-                <TextBlock
-                    Text="{x:Bind ViewModel.DayGrids.Month, Mode=OneWay}"
+                    <TextBlock
+                    Text="{x:Bind listVM.Month}"
                     Style="{StaticResource HeaderTxt}"
                     Margin="10,0,0,0"/>
-                <TextBlock
+                    <TextBlock
                     Text="月"
                     Style="{StaticResource HeaderTxt}"/>
+                    <TextBlock
+                    Text="{x:Bind listVM.Day}"
+                    Style="{StaticResource HeaderTxt}"
+                    Margin="10,0,0,0"/>
+                    <TextBlock
+                    Text="日"
+                    Style="{StaticResource HeaderTxt}"/>
+                </StackPanel>
             </StackPanel>
-            <AppBarButton 
-                Icon="Forward"
-                IsCompact="True"
-                Margin="40,0,0,0"
-                VerticalAlignment="Center"
-                Click="AppBarButtonNext_Click"/>
-        </StackPanel>
 
-        <!-- Content -->
-        <StackPanel
-            Orientation="Vertical"
-            x:Name="contentPanel">
-            <!-- Week bar -->
-            <GridView
-                ItemsSource="{x:Bind ViewModel.Weeks}"
-                IsEnabled="False">
-                <GridView.ItemTemplate>
-                    <DataTemplate x:DataType="model:Week">
-                        <StackPanel
-                            x:Name="gridPanel"
-                            Width="{Binding Width, ElementName=contentPanel, Converter={StaticResource TotalWidthToGridWidth}}">
-                            <TextBlock
-                                Text="{x:Bind Name}"
-                                HorizontalAlignment="Right"
-                                Style="{StaticResource WeekTxt}"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </GridView.ItemTemplate>
-            </GridView>
+            <!--Content-->
+            <ListView
+            ItemsSource="{x:Bind listVM.TodoItems}"
+            IsItemClickEnabled="True"
+            ItemClick="ListView_ItemClick">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment"
+                                Value="Stretch"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
 
-            <!-- Calendar content -->
-            <GridView
-                ItemsSource="{x:Bind ViewModel.DayGrids}"
-                ItemClick="CalendarGridView_ItemClick"
-                IsItemClickEnabled="True">
-                <GridView.ItemTemplate>
-                    <DataTemplate x:DataType="model:DayGrid">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="model:TodoItem">
                         <UserControl>
                             <StackPanel
-                                x:Name="gridPanel"
-                                Orientation="Vertical"
-                                Width="{Binding Width, ElementName=contentPanel, Converter={StaticResource TotalWidthToGridWidth}}"
-                                Height="{Binding Width, ElementName=gridPanel}">
+                            Orientation="Vertical">
                                 <TextBlock
-                                    Text="{x:Bind Day}"
-                                    HorizontalAlignment="Right"
-                                    VerticalAlignment="Top"
-                                    Margin="0,5,5,0"
-                                    Style="{StaticResource GridNumTxt}"
-                                    Visibility="{x:Bind Enable, Converter={StaticResource BoolToVisibility}}"/>
+                                Text="{x:Bind Title}"
+                                Style="{StaticResource TodoListTitleTxt}"
+                                Margin="10,10,0,0"/>
                                 <TextBlock
-                                    x:Name="itemsNumTxt"
-                                    Text="{x:Bind TodoItems.Count}"
-                                    HorizontalAlignment="Left"
-                                    Margin="10,14,0,0"
-                                    Style="{StaticResource GridItemsNumTxt}"
-                                    Visibility="{x:Bind TodoItems.Count, Converter={StaticResource IntToVisibility}}"/>
+                                Text="{x:Bind Details}"
+                                Style="{StaticResource TodoListDetailsTxt}"
+                                TextWrapping="Wrap"
+                                Margin="15,20,0,10"/>
                             </StackPanel>
                         </UserControl>
                     </DataTemplate>
-                </GridView.ItemTemplate>
-            </GridView>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackPanel>
-       
+
+        <StackPanel
+            x:Name="CalendarPanel"
+            HorizontalAlignment="Center"
+            Grid.Column="0"
+            Orientation="Vertical"
+            Margin="0,10,10,10"
+            Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+            <!-- Title -->
+            <StackPanel
+                Orientation="Horizontal"
+                HorizontalAlignment="Center"
+                Margin="0,0,0,30">
+                <AppBarButton
+                    Icon="Back"
+                    IsCompact="True"
+                    Margin="0,0,40,0"
+                    VerticalAlignment="Center"
+                    Click="AppBarButtonBack_Click"/>
+                <StackPanel
+                    Orientation="Horizontal"
+                    VerticalAlignment="Center">
+                    <TextBlock
+                        Text="{x:Bind ViewModel.DayGrids.Year, Mode=OneWay}"      
+                        Style="{StaticResource HeaderTxt}"/>
+                    <TextBlock
+                        Text="年"
+                        Style="{StaticResource HeaderTxt}"/>
+                    <TextBlock
+                        Text="{x:Bind ViewModel.DayGrids.Month, Mode=OneWay}"
+                        Style="{StaticResource HeaderTxt}"
+                        Margin="10,0,0,0"/>
+                    <TextBlock
+                        Text="月"
+                        Style="{StaticResource HeaderTxt}"/>
+                </StackPanel>
+                <AppBarButton 
+                    Icon="Forward"
+                    IsCompact="True"
+                    Margin="40,0,0,0"
+                    VerticalAlignment="Center"
+                    Click="AppBarButtonNext_Click"/>
+            </StackPanel>
+
+            <!-- Content -->
+            <StackPanel
+                Orientation="Vertical"
+                HorizontalAlignment="Center"
+                Width="500"
+                x:Name="contentPanel">
+                <!-- Week bar -->
+                <GridView
+                    ItemsSource="{x:Bind ViewModel.Weeks}"
+                    IsEnabled="False">
+                    <GridView.ItemTemplate>
+                        <DataTemplate x:DataType="model:Week">
+                            <StackPanel
+                                x:Name="gridPanel"
+                                Width="{Binding Width, ElementName=contentPanel, Converter={StaticResource TotalWidthToGridWidth}}">
+                                <TextBlock
+                                    Text="{x:Bind Name}"
+                                    HorizontalAlignment="Right"
+                                    Style="{StaticResource WeekTxt}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+                </GridView>
+
+                <!-- Calendar content -->
+                <GridView
+                    ItemsSource="{x:Bind ViewModel.DayGrids}"
+                    ItemClick="CalendarGridView_ItemClick"
+                    IsItemClickEnabled="True">
+                    <GridView.ItemTemplate>
+                        <DataTemplate x:DataType="model:DayGrid">
+                            <UserControl>
+                                <StackPanel
+                                    x:Name="gridPanel"
+                                    Orientation="Vertical"
+                                    Width="{Binding Width, ElementName=contentPanel, Converter={StaticResource TotalWidthToGridWidth}}"
+                                    Height="{Binding Width, ElementName=gridPanel}">
+                                    <TextBlock
+                                        Text="{x:Bind Day}"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Top"
+                                        Margin="0,5,5,0"
+                                        Style="{StaticResource GridNumTxt}"
+                                        Visibility="{x:Bind Enable, Converter={StaticResource BoolToVisibility}}"/>
+                                    <TextBlock
+                                        x:Name="itemsNumTxt"
+                                        Text="{x:Bind TodoItems.Count}"
+                                        HorizontalAlignment="Left"
+                                        Margin="10,14,0,0"
+                                        Style="{StaticResource GridItemsNumTxt}"
+                                        Visibility="{x:Bind TodoItems.Count, Converter={StaticResource IntToVisibility}}"/>
+                                </StackPanel>
+                            </UserControl>
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+                </GridView>
+            </StackPanel>
+        </StackPanel>
+
         <!-- Adaptive state groups (Grid size) -->
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
                 <VisualState>
                     <VisualState.Setters>
-                        <Setter Target="contentPanel.Width" Value="500"/>
+                        <Setter Target="ListPanel.Visibility" Value="Collapsed"/>
+                        <Setter Target="CalendarPanel.(Grid.ColumnSpan)" Value="2"/>
                     </VisualState.Setters>
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="1"/>
@@ -133,22 +216,15 @@
                 </VisualState>
                 <VisualState>
                     <VisualState.Setters>
-                        <Setter Target="contentPanel.Width" Value="600"/>
+                        <Setter Target="ListPanel.Visibility" Value="Visible"/>
+                        <Setter Target="CalendarPanel.(Grid.ColumnSpan)" Value="1"/>
                     </VisualState.Setters>
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="700"/>
                     </VisualState.StateTriggers>
                 </VisualState>
-                <VisualState>
-                    <VisualState.Setters>
-                        <Setter Target="contentPanel.Width" Value="650"/>
-                    </VisualState.Setters>
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="800"/>
-                    </VisualState.StateTriggers>
-                </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-    </StackPanel>
+    </Grid>
 
 </Page>
